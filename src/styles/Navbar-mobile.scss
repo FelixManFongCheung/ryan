@@ -1,0 +1,36 @@
+.mobo-nav {
+    display:none;
+    @include bp-only(mobo);
+
+    .nav-overlay{
+        position:fixed;
+        opacity: 0;
+        visibility: hidden;
+        z-index:1;
+        left:0;
+        top:0;
+        background-color:#333, 0.5;
+        width:100%;
+        height: 100%;
+        transition: visibility 0s 2s, opacity 2s ease-out; 
+
+        &.open {
+          opacity: 1;
+          visibility: visible;
+          transition: opacity 0.5s ease-in;
+        }
+      
+        .nav-menu{
+          background-color: blue;
+          position: inherit;
+          display:flex;
+          width:50%;
+          height:100%;
+          .nav-mobo-closebtn {
+           position: absolute;
+           top: 0;
+           right: 0;
+         }
+       }
+      }
+}
