@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Nav_menu from './NavMenu'
+import NavMenu from './NavMenu'
 
 export default function NavbarMobile() {
 
@@ -18,7 +18,7 @@ export default function NavbarMobile() {
         <div className={`nav-overlay ${isOpen ? 'open' : ''}`}>
             <div className='nav-mobile-wrapper'> 
                 <div className='nav-mobo-closebtn' onClick={toggleNav}>x</div>
-                <Nav_menu toggleNav={toggleNav}/>
+                <NavMenu toggleNav={toggleNav}/>
             </div>
         </div>
     </div>
