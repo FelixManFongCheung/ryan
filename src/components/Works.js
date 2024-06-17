@@ -1,7 +1,9 @@
 import React, {useState} from 'react';
 import Carousel from 'react-bootstrap/Carousel';
 
-
+// cards.map(card => (
+//   <img loading="lazy" src={SportImages[card.image_ref]} />
+// ))
 export default function Works() {
   const [index, setIndex] = useState(0);
 
