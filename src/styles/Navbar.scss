@@ -8,9 +8,8 @@
     overflow: hidden;
     margin-right: 20px; 
     letter-spacing: -2.5px;
-    text-decoration: none;
   
-    a:focus { text-decoration: none;}
+    a:focus { text-decoration: none; color:black }
     a:visited, a:hover, a:active { text-decoration: none; color:black }
   } 
 
