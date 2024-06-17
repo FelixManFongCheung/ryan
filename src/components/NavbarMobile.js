@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import Nav_menu from './Nav-menu'
+import Nav_menu from './NavMenu'
 
-export default function Navbar_mobile() {
+export default function NavbarMobile() {
 
     const [isOpen, setIsOpen] = useState(false);
     const toggleNav = () => {

@@ -1,7 +1,7 @@
 import React from 'react'
-import Nav_menu from './Nav-menu'
+import Nav_menu from './NavMenu'
 
-export default function Navbar_desktop() {
+export default function NavbarDesktop() {
     return (
       <Nav_menu desktop_menu={'nav-desktop'}/>
     )

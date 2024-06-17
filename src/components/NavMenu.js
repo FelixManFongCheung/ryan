@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 
-export default function Nav_menu({desktop_menu, toggleNav}) {
+export default function NavMenu({desktop_menu, toggleNav}) {
 
   const handleClick = () => {
     if (toggleNav) {
