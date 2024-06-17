@@ -2,9 +2,13 @@
 @import 'Navbar.scss';
 @import 'Navbar-mobile.scss';
 @import 'About.scss';
-
+@import '~bootstrap/scss/bootstrap';
 
 * {
     font-family: Perpetua, serif;
+}
+
+.content {
+    margin-top: 50px;
 }
 

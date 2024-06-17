@@ -1,22 +1,38 @@
-import React, {useState} from 'react';
-import Carousel from 'react-bootstrap/Carousel';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 
-// cards.map(card => (
-//   <img loading="lazy" src={SportImages[card.image_ref]} />
-// ))
-export default function Works() {
-  const [index, setIndex] = useState(0);
+const Works = () => {
+  const [images, setImages] = useState([]);
 
-  const handleSelect = (selectedIndex) => {
-    setIndex(selectedIndex);
-  };
+  useEffect(() => {
+    const fetchImages = async () => {
+      try {
+        const response = await axios.get('/.netlify/functions/fetch-images');
+        console.log(response);
+        setImages(response.data);
+      } catch (error) {
+        console.error('Error fetching images:', error);
+      }
+    };
+
+    fetchImages();
+  }, []);
 
   return (
-    <Carousel activeIndex={index} onSelect={handleSelect}>
-      <Carousel.Item></Carousel.Item>
-    </Carousel> 
+    <div>
+      <h1>Dynamic Image Gallery</h1>
+      <div>
+        {images.map((image, index) => (
+          <img
+            key={index}
+            src={`${image.secure_url}?f_auto,q_auto`}
+            alt={image.public_id}
+            style={{ width: '300px', height: 'auto' }}
+          />
+        ))}
+      </div>
+    </div>
+  );
+};
 
-  )
-}
-
-
+export default Works;
