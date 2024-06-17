@@ -1,28 +1,30 @@
-.nav-desktop {
-  font-size: 20px;
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  padding: 0;
-  margin: 0;
+.nav-menu {
   list-style-type: none;
   text-align: center; 
-  @include bp-only(desktop)
-}
 
-.nav-desktop li {
-  display: inline-block;
-  line-height: 10px;
-  overflow: hidden;
-  margin-right: 20px; 
-//   word-spacing: ;
-  letter-spacing: -2.5px;
+  li {
+    display: inline-block;
+    line-height: 10px;
+    overflow: hidden;
+    margin-right: 20px; 
+    letter-spacing: -2.5px;
+  
+    a:focus { text-decoration: none;}
+    a:visited, a:hover, a:active { text-decoration: none; color:black }
+  } 
 
-  a:focus { text-decoration: none;}
-  a:visited, a:hover, a:active { text-decoration: none; color:black }
-}
-
-.nav-desktop li:last-child {
-  margin-right: 0; 
+  li:last-child {
+    margin-right: 0; 
+  }
+  
+  &.nav-desktop {
+    font-size: 20px;
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 0;
+    margin: 0;
+    @include bp-only(desktop);
+  }
 }

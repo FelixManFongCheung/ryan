@@ -1,14 +1,8 @@
 import React from 'react'
-import { Link } from 'react-router-dom';
+import Nav_menu from './Nav-menu'
 
 export default function Navbar_desktop() {
     return (
-      <ul className='nav-desktop'>
-          <li><Link to="/">Home</Link></li>
-          <li><Link to="/Works">Works</Link></li>
-          <li><Link to="/About">About</Link></li>
-          <li><Link to="/Contact">Contact</Link></li>
-      </ul>
-  
+      <Nav_menu desktop_menu={'nav-desktop'}/>
     )
 }

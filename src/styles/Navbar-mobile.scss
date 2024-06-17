@@ -9,28 +9,42 @@
         z-index:1;
         left:0;
         top:0;
-        background-color:#333, 0.5;
         width:100%;
         height: 100%;
-        transition: visibility 0s 2s, opacity 2s ease-out; 
 
         &.open {
           opacity: 1;
+          background-color: rgba($color: #000000, $alpha: 0.7);
           visibility: visible;
-          transition: opacity 0.5s ease-in;
+          transition: opacity 0.2s ease-in;
         }
-      
-        .nav-menu{
-          background-color: blue;
-          position: inherit;
-          display:flex;
-          width:50%;
-          height:100%;
-          .nav-mobo-closebtn {
-           position: absolute;
-           top: 0;
-           right: 0;
-         }
-       }
+        .nav-mobile-wrapper {
+            position: relative;
+            background-color: white;
+            width: 50%;
+            height: 100%;
+
+            .nav-menu{
+              position: inherit;
+              display:flex;
+              flex-direction: column;
+              width:100%;
+              height:100%;
+              padding: 0;
+              text-align: left;
+              gap: 10px;
+    
+              li {
+                margin-left: 10px;
+                font-size: 30px;
+                line-height: 15px;
+              }
+            }
+
+            .nav-mobo-closebtn {
+                position: relative;
+                text-align: right;
+               }
+        }
       }
 }
