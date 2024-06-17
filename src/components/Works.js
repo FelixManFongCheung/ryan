@@ -7,7 +7,7 @@ const Works = () => {
   useEffect(() => {
     const fetchImages = async () => {
       try {
-        const response = await axios.get('/.netlify/functions/cloudinary_fetch');
+        const response = await axios.get('/.netlify/functions/cloudinaryFetch');
         console.log(response);
         setImages(response.data);
       } catch (error) {
