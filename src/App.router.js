@@ -1,4 +1,4 @@
-import { Navigate, RouteObject } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import About from './components/About';
 import Contact from './components/Contact';
 import Home from './components/Home';
