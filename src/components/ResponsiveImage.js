@@ -1,5 +1,5 @@
 import React from 'react';
-import { AdvancedImage, responsive, lazyload } from '@cloudinary/react';
+import { AdvancedImage } from '@cloudinary/react';
 import { CloudinaryImage } from '@cloudinary/url-gen/assets/CloudinaryImage';
 import { fill } from "@cloudinary/url-gen/actions/resize";
 import { quality } from '@cloudinary/url-gen/actions/delivery';
@@ -17,7 +17,7 @@ const ResponsiveImage = ({ publicId }) => {
         <AdvancedImage
           cldImg={image}
           alt="Responsive Image"
-          plugins={[lazyload(), responsive()]}
+          plugins={[]}
         />
     </div>
   );
