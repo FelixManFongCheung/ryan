@@ -12,6 +12,8 @@ exports.handler = async function(event, context) {
       .expression('tags=ryan')
       .execute();
 
+    console.log(result);
+
     const optimizedImages = result.resources.map(image => ({
       ...image
     }));
