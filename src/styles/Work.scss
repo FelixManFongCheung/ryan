@@ -1,0 +1,14 @@
+.react-multi-carousel-item  {
+    display: flex;
+    justify-content: center;
+
+    .image-wrapper {
+        // width: 100%;
+        height: auto;
+    }
+}
+
+.react-multiple-carousel__arrow {
+    height: 100%;
+    opacity: 0;
+}

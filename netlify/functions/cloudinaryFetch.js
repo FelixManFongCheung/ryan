@@ -6,8 +6,6 @@ cloudinary.config({
   api_secret: process.env.REACT_APP_CLOUDINARY_SECRET,
 });
 
-console.log('local');
-
 exports.handler = async function(event, context) {
   try {
     const result = await cloudinary.search
@@ -16,14 +14,6 @@ exports.handler = async function(event, context) {
 
     const optimizedImages = result.resources.map(image => ({
       ...image,
-      secure_url: cloudinary.url(image.public_id, {
-        transformation: [
-          // { fetch_format: 'auto' }, // Automatically selects the best format
-          { quality: 'auto:best' }, // Automatically adjusts quality
-          { width: 300, crop: 'scale' }, // Example resizing
-          { dpr: 'auto' }
-        ]
-      })
     }));
 
     return {
@@ -37,6 +27,3 @@ exports.handler = async function(event, context) {
     };
   }  
 }
-// export default async (req, context) => {
-//     return new Response("Hello, world!");
-// }

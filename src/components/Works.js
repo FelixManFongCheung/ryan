@@ -1,37 +1,39 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import Carousel from 'react-multi-carousel';
+import 'react-multi-carousel/lib/styles.css';
+import ResponsiveImage from './ResponsiveImage';
 
 const Works = () => {
   const [images, setImages] = useState([]);
 
+  const responsivity = {
+    mobile: {
+      breakpoint: { max: 2000, min: 0 },
+      items: 1
+    }
+  };
+
+
   useEffect(() => {
     const fetchImages = async () => {
-      try {
-        const response = await axios.get('/.netlify/functions/cloudinaryFetch');
-        console.log(response);
-        setImages(response.data);
-      } catch (error) {
-        console.error('Error fetching images:', error);
-      }
+        const response = await fetch('/.netlify/functions/cloudinaryFetch');
+        const data = await response.json();
+        setImages(data);
     };
-
     fetchImages();
   }, []);
 
   return (
-    <div>
-      <h1>Dynamic Image Gallery</h1>
-      <div>
-        {images.map((image, index) => (
-          <img
-            key={index}
-            src={`${image.secure_url}?f_auto,q_auto`}
-            alt={image.public_id}
-            style={{ width: '300px', height: 'auto' }}
-          />
-        ))}
-      </div>
-    </div>
+    <Carousel   
+      showDots={false}
+      responsive={responsivity}
+      // centerMode={true}
+      className='content'
+    >
+      {images.map((image, index) => (
+        <ResponsiveImage key={image.public_id || index} publicId={image.public_id}/>
+      ))}
+    </Carousel>
   );
 };
 

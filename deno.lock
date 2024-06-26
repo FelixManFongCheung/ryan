@@ -1,0 +1,35 @@
+{
+  "version": "3",
+  "remote": {
+    "https://edge.netlify.com/": "ff84a16f192fdb43db8b9dff869889f555c05857d075044d2a7cfa54c283a0a0",
+    "https://edge.netlify.com/bootstrap/config.ts": "0aa0a225d978b89e0e62cbd853701605199e7a84095e55eeb70147faf1a24803",
+    "https://edge.netlify.com/bootstrap/context.ts": "8f99269eeeeccf9b852e6089cc648c962a0ea20b2198b8b38b38e3b2ce2b9143",
+    "https://edge.netlify.com/bootstrap/cookie.ts": "8b0baae708989ca183c6f3b4ab3d029e6abcbc2e43f93edeb0ff447b3bbc3a05",
+    "https://edge.netlify.com/bootstrap/edge_function.ts": "b8253e86aa83c67341f5cfedeba5049d77fbf84dcab7eceff7566b7728ae9b39",
+    "https://edge.netlify.com/bootstrap/globals.ts": "38f9e0be6c2c78206bf14d2387d41964d38bbe81644b3668e203c6f6473408a7"
+  },
+  "workspace": {
+    "packageJson": {
+      "dependencies": [
+        "npm:@babel/plugin-proposal-private-property-in-object@^7.21.11",
+        "npm:@cloudinary/react@^1.13.0",
+        "npm:@cloudinary/url-gen@^1.19.0",
+        "npm:@netlify/functions@^2.7.0",
+        "npm:@testing-library/jest-dom@^5.17.0",
+        "npm:@testing-library/react@^13.4.0",
+        "npm:@testing-library/user-event@^13.5.0",
+        "npm:axios@^1.7.2",
+        "npm:bootstrap@^5.3.3",
+        "npm:cloudinary@^2.2.0",
+        "npm:netlify-cli@^17.28.0",
+        "npm:react-bootstrap@^2.10.2",
+        "npm:react-dom@^18.3.1",
+        "npm:react-router-dom@^6.23.1",
+        "npm:react-scripts@5.0.1",
+        "npm:react@^18.3.1",
+        "npm:sass@^1.77.4",
+        "npm:web-vitals@^2.1.4"
+      ]
+    }
+  }
+}
