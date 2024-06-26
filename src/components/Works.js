@@ -19,6 +19,7 @@ const Works = () => {
         const response = await fetch('/.netlify/functions/cloudinaryFetch');
         const data = await response.json();
         setImages(data);
+        console.log('loading data');
     };
     fetchImages();
   }, []);
