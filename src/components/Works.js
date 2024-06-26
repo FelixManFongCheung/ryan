@@ -16,9 +16,7 @@ const Works = () => {
 
   useEffect(() => {
     const fetchImages = async () => {
-        console.log('cndfjnvkjdf');
         const response = await fetch('/.netlify/functions/cloudinaryFetch');
-        console.log(response);
         const data = await response.json();
         setImages(data);
     };
