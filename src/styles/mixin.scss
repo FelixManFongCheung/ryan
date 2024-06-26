@@ -1,6 +1,6 @@
 $breakpoint-mobo: "(max-width: 768px)";
 $breakpoint-desktop: "(min-width: 768px)";
-
+$global-left: 10px;
 
 @mixin bp-only($point) {
     @if $point == mobo {
