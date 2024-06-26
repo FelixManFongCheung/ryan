@@ -27,11 +27,15 @@ const Works = () => {
     <Carousel   
       showDots={false}
       responsive={responsivity}
+      customTransition="opacity .5"
       // centerMode={true}
       className='content'
     >
       {images.map((image, index) => (
-        <ResponsiveImage key={image.public_id || index} publicId={image.public_id}/>
+        <div>
+          <ResponsiveImage key={image.public_id || index} publicId={image.public_id}/>
+          <div>caption</div>
+        </div>
       ))}
     </Carousel>
   );

@@ -1,0 +1,19 @@
+{
+	"geolocation": {
+		"data": {
+			"city": "Silkeborg",
+			"country": {
+				"code": "DK",
+				"name": "Denmark"
+			},
+			"subdivision": {
+				"code": "82",
+				"name": "Central Jutland"
+			},
+			"timezone": "Europe/Copenhagen",
+			"latitude": 56.1728,
+			"longitude": 9.5476
+		},
+		"timestamp": 1719407614115
+	}
+}
