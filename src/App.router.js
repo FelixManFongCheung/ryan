@@ -6,7 +6,7 @@ import Works from './components/Works';
 import AppLayout from './App.layout';
 
 const RouterBuilder = () => {
-  const generalRoutes: RouteObject[] = [
+  const generalRoutes = [
     {
       path: '/',
       element: <Home />,
@@ -29,7 +29,7 @@ const RouterBuilder = () => {
     },
   ];
 
-  const routes: RouteObject[] = [
+  const routes = [
     {
       element: <AppLayout />,
       children: generalRoutes,
