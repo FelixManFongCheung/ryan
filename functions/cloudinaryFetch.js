@@ -13,7 +13,7 @@ exports.handler = async function(event, context) {
       .execute();
 
     const optimizedImages = result.resources.map(image => ({
-      ...image,
+      ...image
     }));
 
     return {
