@@ -32,8 +32,8 @@ const Works = () => {
       className='content'
     >
       {images.map((image, index) => (
-        <div>
-          <ResponsiveImage key={image.public_id || index} publicId={image.public_id}/>
+        <div key={image.public_id || index}>
+          <ResponsiveImage publicId={image.public_id}/>
           <div>caption</div>
         </div>
       ))}
