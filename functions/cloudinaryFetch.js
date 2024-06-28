@@ -10,7 +10,7 @@ exports.handler = async function(event, context) {
   try {
     const result = await cloudinary.api.resources({
       type: 'upload',
-      prefix: 'ryan', // Add a specific folder prefix if needed
+      prefix: 'ryan',
     });
 
     return {
