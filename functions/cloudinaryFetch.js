@@ -8,11 +8,16 @@ cloudinary.config({
 
 exports.handler = async function(event, context) {
   try {
-    console.log('nvjkfdnvjknsdfkjlv');
+    const result = await cloudinary.api.resources({
+      type: 'upload',
+      prefix: 'ryan',
+    });
+
+    console.log(result);
 
     return {
       statusCode: 200,
-      body: JSON.stringify(result),
+      body: JSON.stringify(result.resources),
     };
   } catch (error) {
     return {

@@ -18,7 +18,7 @@ const Works = () => {
     const fetchImages = async () => {
         const response = await fetch('/.netlify/functions/cloudinaryFetch');
         const data = await response.json();
-        setImages(data.resources);
+        setImages(data);
     };
     fetchImages();
   }, []);
