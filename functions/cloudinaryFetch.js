@@ -8,19 +8,14 @@ cloudinary.config({
 
 exports.handler = async function(event, context) {
   try {
-    const result = await cloudinary.search
-      .expression('tags=ryan')
-      .execute();
-
-    console.log(result);
-
-    const optimizedImages = result.resources.map(image => ({
-      ...image
-    }));
+    const result = await cloudinary.api.resources({
+      type: 'upload',
+      prefix: 'ryan', // Add a specific folder prefix if needed
+    });
 
     return {
       statusCode: 200,
-      body: JSON.stringify(optimizedImages),
+      body: JSON.stringify(result),
     };
   } catch (error) {
     return {
@@ -29,3 +24,4 @@ exports.handler = async function(event, context) {
     };
   }  
 }
+
