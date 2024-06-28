@@ -32,7 +32,7 @@ const Works = () => {
       className='content'
     >
       {images.map((image, index) => (
-        <div key={image.public_id || index}>
+        <div className='carousel-item-wrapper' key={image.public_id || index}>
           <ResponsiveImage publicId={image.public_id}/>
           <h2>{image.title}</h2>
           <p>{image.description}</p>
