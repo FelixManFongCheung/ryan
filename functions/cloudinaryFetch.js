@@ -18,6 +18,7 @@ exports.handler = async function(event, context) {
       body: JSON.stringify(result),
     };
   } catch (error) {
+    console.log('errrorrrrr bitch');
     return {
       statusCode: 500,
       body: JSON.stringify({ error: 'Failed to fetch images' }),
