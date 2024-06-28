@@ -3,48 +3,56 @@
     @include bp-only(mobo);
 
     .nav-overlay{
-        position:fixed;
-        opacity: 0;
-        visibility: hidden;
-        z-index:1;
-        left:0;
-        top:0;
+      position:fixed;
+      opacity: 0;
+      visibility: hidden;
+      z-index:1;
+      left:0;
+      top:0;
+      width:100%;
+      height: 100%;
+
+      &.open {
+        opacity: 1;
+        background-color: rgba($color: #000000, $alpha: 0.5);
+        visibility: visible;
+        transition: opacity 0.2s ease-in;
+      }
+    }
+
+    .nav-mobile-wrapper {
+      position: fixed;
+      background-color: white;
+      width: 50%;
+      height: 100%;
+      top: 0;
+      opacity: 0;
+      visibility: hidden;
+      z-index:2;
+
+
+      .nav-menu{
+        position: relative;
+        display:flex;
+        flex-direction: column;
         width:100%;
-        height: 100%;
+        height:100%;
+        padding: 0;
+        text-align: left;
+        gap: 10px;
 
-        &.open {
-          opacity: 1;
-          background-color: rgba($color: #000000, $alpha: 0.5);
-          visibility: visible;
-          transition: opacity 0.2s ease-in;
-        }
-        .nav-mobile-wrapper {
-            position: relative;
-            background-color: white;
-            width: 50%;
-            height: 100%;
-
-            .nav-menu{
-              position: inherit;
-              display:flex;
-              flex-direction: column;
-              width:100%;
-              height:100%;
-              padding: 0;
-              text-align: left;
-              gap: 10px;
-    
-              li {
-                margin-left: 10px;
-                font-size: 30px;
-                line-height: 15px;
-              }
-            }
-
-            .nav-mobo-closebtn {
-                position: relative;
-                text-align: right;
-               }
+        li {
+          margin-left: 10px;
+          font-size: 30px;
+          line-height: 15px;
         }
       }
+
+      &.open {
+        opacity: 1;
+        background-color: white;
+        visibility: visible;
+        transition: opacity 0.2s ease-in;
+      }
+  }
 }

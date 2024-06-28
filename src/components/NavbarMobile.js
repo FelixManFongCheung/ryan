@@ -11,15 +11,13 @@ export default function NavbarMobile() {
     return (
     // <div className='nav-toggle'> - </div>
     <div className='mobo-nav'>
-        {/* <div className='nav-mobo-toggle'>x</div> */}
         <div className='toggle-button' onClick={toggleNav}>
             haah
         </div>
-        <div className={`nav-overlay ${isOpen ? 'open' : ''}`}>
-            <div className='nav-mobile-wrapper'> 
-                <div className='nav-mobo-closebtn' onClick={toggleNav}>x</div>
-                <NavMenu toggleNav={toggleNav}/>
-            </div>
+        <div className={`nav-overlay ${isOpen ? 'open' : ''}`} onClick={toggleNav}>
+        </div>
+        <div className={`nav-mobile-wrapper ${isOpen ? 'open' : ''}`}> 
+            <NavMenu toggleNav={toggleNav}/>
         </div>
     </div>
 
