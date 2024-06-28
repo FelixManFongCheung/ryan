@@ -8,17 +8,13 @@ cloudinary.config({
 
 exports.handler = async function(event, context) {
   try {
-    const result = await cloudinary.api.resources({
-      type: 'upload',
-      prefix: 'ryan',
-    });
+    console.log('nvjkfdnvjknsdfkjlv');
 
     return {
       statusCode: 200,
       body: JSON.stringify(result),
     };
   } catch (error) {
-    console.log('errrorrrrr bitch');
     return {
       statusCode: 500,
       body: JSON.stringify({ error: 'Failed to fetch images' }),
