@@ -34,7 +34,8 @@ const Works = () => {
       {images.map((image, index) => (
         <div key={image.public_id || index}>
           <ResponsiveImage publicId={image.public_id}/>
-          <div>caption</div>
+          <h2>{image.title}</h2>
+          <p>{image.description}</p>
         </div>
       ))}
     </Carousel>
