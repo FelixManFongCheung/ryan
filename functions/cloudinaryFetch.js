@@ -1,9 +1,9 @@
 const cloudinary = require('cloudinary').v2;
 
 cloudinary.config({
-  cloud_name: process.env.REACT_APP_CLOUDINARY_NAME,
-  api_key: process.env.REACT_APP_CLOUDINARY_KEY,
-  api_secret: process.env.REACT_APP_CLOUDINARY_SECRET,
+  cloud_name: CLOUDINARY_NAME,
+  api_key: CLOUDINARY_KEY,
+  api_secret: CLOUDINARY_SECRET,
 });
 
 exports.handler = async function(event, context) {
