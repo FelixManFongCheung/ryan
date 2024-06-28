@@ -11,8 +11,8 @@ export default function NavbarMobile() {
     return (
     // <div className='nav-toggle'> - </div>
     <div className='mobo-nav'>
-        <div className='toggle-button' onClick={toggleNav}>
-            haah
+        <div className='font-alter' onClick={toggleNav}>
+            Menu
         </div>
         <div className={`nav-overlay ${isOpen ? 'open' : ''}`} onClick={toggleNav}>
         </div>

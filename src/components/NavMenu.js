@@ -12,10 +12,10 @@ export default function NavMenu({desktop_menu, toggleNav}) {
 
   return (
     <ul className={`${desktop_menu || ''} nav-menu`}>
-          <li onClick={handleClick}><Link to="/">Home</Link></li>
-          <li onClick={handleClick}><Link to="/Works">Works</Link></li>
-          <li onClick={handleClick}><Link to="/About">About</Link></li>
-          <li onClick={handleClick}><Link to="/Contact">Contact</Link></li>
+          <li className='font-alter' onClick={handleClick}><Link to="/">Home</Link></li>
+          <li className='font-alter' onClick={handleClick}><Link to="/Works">Works</Link></li>
+          <li className='font-alter' onClick={handleClick}><Link to="/About">About</Link></li>
+          <li className='font-alter' onClick={handleClick}><Link to="/Contact">Contact</Link></li>
     </ul>
   )
 }

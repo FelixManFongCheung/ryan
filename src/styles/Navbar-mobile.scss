@@ -1,6 +1,14 @@
 .mobo-nav {
     display:none;
     @include bp-only(mobo);
+    top: 5px;
+    position: relative;
+
+
+    .font-alter {
+      font-size: 30px;
+      line-height: 15px;
+    }
 
     .nav-overlay{
       position:fixed;

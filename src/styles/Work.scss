@@ -4,8 +4,10 @@
         justify-content: center;
 
         .carousel-item-wrapper {
-            width: 100%;
-            padding-right: $global-left;
+            width: 500px;
+            @media #{$breakpoint-desktop} {
+                padding-right: $global-left;
+            }
             .image-wrapper {
                 max-width: 100%;
                 height: auto;
@@ -14,8 +16,8 @@
                 align-items: center;
                 overflow: hidden;
                 position: relative;
-                padding-top: 56.25%; /* 16:9 Aspect Ratio (divide 9 by 16 = 0.5625 or 56.25%) */
-                margin: 10px 0; /* Space between images */
+                padding-top: 66.7%;
+                margin: 10px 0;
             }
             
             .image-wrapper img {
