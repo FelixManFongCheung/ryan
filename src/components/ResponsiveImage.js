@@ -8,7 +8,7 @@ import { format } from '@cloudinary/url-gen/actions/delivery';
 
 const ResponsiveImage = ({ publicId }) => {
   // Create a CloudinaryImage instance
-  const image = new CloudinaryImage(publicId, { cloudName: process.env.REACT_APP_CLOUDINARY_NAME });
+  const image = new CloudinaryImage(publicId, { cloudName: process.env.CLOUDINARY_NAME });
 
   image.resize(fill().width(500)).delivery(quality('auto:best')).delivery(format('auto'))
 
