@@ -20,6 +20,7 @@ exports.handler = async function(event, context) {
       body: JSON.stringify(result.resources),
     };
   } catch (error) {
+    console.log(process.env.REACT_APP_CLOUDINARY_NAME);
     console.log(error);
     return {
       statusCode: 500,
