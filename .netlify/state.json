@@ -1,7 +1,7 @@
 {
 	"geolocation": {
 		"data": {
-			"city": "Frederiksberg",
+			"city": "Copenhagen",
 			"country": {
 				"code": "DK",
 				"name": "Denmark"
@@ -11,10 +11,10 @@
 				"name": "Capital Region"
 			},
 			"timezone": "Europe/Copenhagen",
-			"latitude": 55.6769,
-			"longitude": 12.5268
+			"latitude": 55.6702,
+			"longitude": 12.5298
 		},
-		"timestamp": 1719566336279
+		"timestamp": 1719657912462
 	},
 	"siteId": "a23a7357-f803-4aa8-906d-83bbaff8a837"
 }
