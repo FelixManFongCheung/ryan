@@ -11,11 +11,9 @@ const instagram = process.env.INSTAGRAM;
 const email = process.env.EMAIL;
 
 exports.handler = async function(event, context) {
-  const referer = event.headers.referer;
-  const url = new URL(referer);
+  const url = new URL(event.headers.referer);
   const segments = url.pathname.split('/');
-  const lastSegment = segments.pop() || segments.pop();
-  const urlSegment = lastSegment.toLowerCase();
+  const urlSegment = segments.pop().toLowerCase();
 
   try {
     const result = await cloudinary.api.resources({
