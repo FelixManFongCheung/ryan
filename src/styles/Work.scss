@@ -4,7 +4,7 @@
         justify-content: center;
 
         .carousel-item-wrapper {
-            width: 500px;
+            width: 650px;
             @media #{$breakpoint-desktop} {
                 padding-right: $global-left;
             }
