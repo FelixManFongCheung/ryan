@@ -2,26 +2,42 @@ import React, { useEffect, useState } from 'react';
 import ResponsiveImage from './ResponsiveImage';
 
 const Works = () => {
-  const [images, setImages] = useState([]);
+  const [collections, setCollections] = useState([]);
+  const [selectedName, setSelectedName] = useState();
 
   useEffect(() => {
-    const fetchImages = async () => {
+    const fetchCollection = async () => {
         const response = await fetch('/.netlify/functions/cloudinaryFetch');
         const data = await response.json();
-        setImages(data);
+        console.log(data);
+        setCollections(data);
     };
-    fetchImages();
+    fetchCollection();
   }, []);
 
   return (
     <div className="content">
-      {images.map((image, index) => (
-        <div className='image-wrapper' key={image.public_id || index}>
-          <ResponsiveImage publicId={image.public_id}/>
-          <h2>{image.title}</h2>
-          <p>{image.description}</p>
-        </div>
-      ))}
+      <div className="work-names">
+        {collections.map((collection, index) => (
+          <span
+            key={collection.folderName}
+            className={`name-item ${selectedName === collection.folderName ? 'selected' : ''}`}
+            onClick={() => setSelectedName(collection.folderName)}
+          >
+            {collection.folderName}
+            {index < collections.length - 1 && ' | '}
+          </span>
+        ))}
+      </div>
+      <div className="gallery">
+        {collections.find(collection => collection.folderName === selectedName)?.images.map((image, index) => (
+          <div key={index}>
+            <ResponsiveImage publicId={image.public_id} alt={`${selectedName} ${index + 1}`}/>
+            <h2>{image.title}</h2>
+            <p>{image.description}</p>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

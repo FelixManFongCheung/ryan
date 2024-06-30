@@ -16,21 +16,32 @@ exports.handler = async function(event, context) {
   const urlSegment = segments.pop().toLowerCase();
 
   try {
-    const result = await cloudinary.api.resources({
-      type: 'upload',
-      prefix: 'ryan',
-      context: true,
-      metadata: true
-    });
-
     let data;
 
     if (urlSegment == 'works') {
-      data = result.resources.map(resource => ({
-        public_id: resource.public_id,
-        title: resource.context && resource.context.custom && resource.context.custom.alt,
-        description: resource.context && resource.context.custom && resource.context.custom.caption,
-      }));
+      const { folders: subfolders } = await cloudinary.api.sub_folders('ryan');
+
+      data = await Promise.all(
+        subfolders.map(async (folder) => {
+
+          const { resources: images } = await cloudinary.search
+            .expression(`folder:${folder.path}/*`)
+            .execute();
+          
+          console.log(images);
+
+          return {
+            folderName: folder.name,
+            images: images.map((image) => ({
+              public_id: image.public_id,
+              title: image.context && image.context.custom && image.context.custom.alt,
+              description: image.context && image.context.custom && image.context.custom.caption,
+            })),
+          };
+        })
+      );
+
+      // console.log(data)
     } else if (urlSegment == 'about') {
       data = await cloudinary.api.metadata_field_by_field_id(about);
     } else if (urlSegment == 'contact') {
