@@ -3,6 +3,7 @@ import About from './components/About';
 import Contact from './components/Contact';
 import Home from './components/Home';
 import Works from './components/Works';
+import Editions from './components/Editions';
 import AppLayout from './App.layout';
 
 const RouterBuilder = () => {
@@ -22,6 +23,10 @@ const RouterBuilder = () => {
     {
       path: '/Works',
       element: <Works />,
+    },
+    {
+      path: '/Editions',
+      element: <Editions />,
     },
     {
       path: '*',
