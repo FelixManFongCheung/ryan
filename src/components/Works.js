@@ -25,14 +25,15 @@ const Works = () => {
             onClick={() => setSelectedName(collection.folderName)}
           >
             {collection.folderName}
-            {index < collections.length - 1 && ' | '}
           </span>
         ))}
       </div>
       <div className="gallery">
         {collections.find(collection => collection.folderName === selectedName)?.images.map((image, index) => (
           <div key={index}>
-            <ResponsiveImage publicId={image.public_id} alt={`${selectedName} ${index + 1}`}/>
+            <div className="image-wrapper">
+              <ResponsiveImage publicId={image.public_id} alt={`${selectedName} ${index + 1}`}/>
+            </div>
             <h2>{image.title}</h2>
             <p>{image.description}</p>
           </div>
