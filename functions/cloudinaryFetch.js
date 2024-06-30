@@ -25,13 +25,13 @@ exports.handler = async function(event, context) {
         subfolders.map(async (folder) => {
 
           const { resources: images } = await cloudinary.search
-            .expression(`folder:${folder.path}/*`)
+            .expression(`folder=ryan/${folder.name}`)
             .execute();
-          
-          console.log(images);
+
+          console.log(folder.name);
 
           return {
-            folderName: folder.name,
+            folderName: folder.name.replace(/_/g, ' '),
             images: images.map((image) => ({
               public_id: image.public_id,
               title: image.context && image.context.custom && image.context.custom.alt,
