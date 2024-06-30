@@ -1,39 +1,26 @@
-.react-multi-carousel-track {
-    .react-multi-carousel-item  {
+.carousel-item-wrapper {
+    width: 650px;
+    @media #{$breakpoint-desktop} {
+        padding-right: $global-left;
+    }
+    .image-wrapper {
+        max-width: 100%;
+        height: auto;
         display: flex;
         justify-content: center;
-
-        .carousel-item-wrapper {
-            width: 650px;
-            @media #{$breakpoint-desktop} {
-                padding-right: $global-left;
-            }
-            .image-wrapper {
-                max-width: 100%;
-                height: auto;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                overflow: hidden;
-                position: relative;
-                padding-top: 66.7%;
-                margin: 10px 0;
-            }
-            
-            .image-wrapper img {
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                object-fit: cover; /* Cover maintains the aspect ratio and fills the container */
-            }
-        }
-
+        align-items: center;
+        overflow: hidden;
+        position: relative;
+        padding-top: 66.7%;
+        margin: 10px 0;
     }
-}
-
-.react-multiple-carousel__arrow {
-    height: 100%;
-    opacity: 0;
+    
+    .image-wrapper img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* Cover maintains the aspect ratio and fills the container */
+    }
 }

@@ -16,6 +16,7 @@ export default function NavMenu({desktop_menu, toggleNav}) {
           <li className='font-alter' onClick={handleClick}><Link to="/Works">Works</Link></li>
           <li className='font-alter' onClick={handleClick}><Link to="/About">About</Link></li>
           <li className='font-alter' onClick={handleClick}><Link to="/Contact">Contact</Link></li>
+          <li className='font-alter' onClick={handleClick}><Link to="/Editions">Editions</Link></li>
     </ul>
   )
 }

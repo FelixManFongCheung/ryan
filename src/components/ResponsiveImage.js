@@ -13,13 +13,11 @@ const ResponsiveImage = ({ publicId }) => {
   image.resize(fill().width(500)).delivery(quality('auto:best')).delivery(format('auto'))
 
   return (
-    <div className='image-wrapper'>
-        <AdvancedImage
-          cldImg={image}
-          alt="Responsive Image"
-          plugins={[lazyload]}
-        />
-    </div>
+    <AdvancedImage
+      cldImg={image}
+      alt="Responsive Image"
+      plugins={[lazyload]}
+    />
   );
 };
 
