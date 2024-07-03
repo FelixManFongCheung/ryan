@@ -28,8 +28,6 @@ exports.handler = async function(event, context) {
             .expression(`folder=${folder.path}`)
             .execute();
 
-          console.log(folder.name);
-
           return {
             folderName: folder.name.replace(/_/g, ' '),
             images: images.map((image) => ({
@@ -41,7 +39,6 @@ exports.handler = async function(event, context) {
         })
       );
 
-      // console.log(data)
     } else if (urlSegment == 'about') {
       data = await cloudinary.api.metadata_field_by_field_id(about);
     } else if (urlSegment == 'contact') {
