@@ -11,7 +11,7 @@ const ResponsiveImage = ({ publicId }) => {
   // Create a CloudinaryImage instance
   const image = new CloudinaryImage(publicId, { cloudName: process.env.REACT_APP_CLOUDINARY_NAME });
   
-  image.resize(fill().width(650)).delivery(quality('auto:best')).delivery(format('auto'))
+  image.resize(fill().width(1000)).delivery(quality('auto:best')).delivery(format('auto'))
 
   return (
     <AdvancedImage
