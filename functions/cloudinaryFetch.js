@@ -4,6 +4,7 @@ cloudinary.config({
   cloud_name: process.env.CLOUDINARY_NAME,
   api_key: process.env.CLOUDINARY_KEY,
   api_secret: process.env.CLOUDINARY_SECRET,
+  secure: true,
 });
 
 const about = process.env.ABOUT;
@@ -18,8 +19,8 @@ exports.handler = async function(event, context) {
   try {
     let data;
 
-    if (urlSegment == 'works') {
-      const { folders: subfolders } = await cloudinary.api.sub_folders('Works');
+    if (urlSegment == 'works' || urlSegment == 'curatorialprojects') {
+      const { folders: subfolders } = await cloudinary.api.sub_folders(`${urlSegment}`);
 
       data = await Promise.all(
         subfolders.map(async (folder) => {

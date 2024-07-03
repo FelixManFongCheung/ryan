@@ -9,6 +9,7 @@ const Works = () => {
     const fetchCollection = async () => {
         const response = await fetch('/.netlify/functions/cloudinaryFetch');
         const data = await response.json();
+        console.log(data);
         setCollections(data);
     };
     fetchCollection();
