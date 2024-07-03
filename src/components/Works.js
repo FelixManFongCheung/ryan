@@ -15,7 +15,7 @@ const Works = () => {
   }, []);
 
   return (
-    <div className="content">
+    <div className="work content">
       <div className="work-names">
         {collections.map((collection, index) => (
           <span
@@ -28,14 +28,8 @@ const Works = () => {
         ))}
       </div>
       <div className="gallery">
-        {collections.find(collection => collection.folderName === selectedName)?.images.map((image, index) => (
-          <div key={index}>
-            <div className="image-wrapper">
-              <ResponsiveImage publicId={image.public_id} alt={`${selectedName} ${index + 1}`}/>
-            </div>
-            <h2>{image.title}</h2>
-            <p>{image.description}</p>
-          </div>
+        {collections.find(collection => collection.folderName === selectedName)?.images.map((image, index) => (   
+            <ResponsiveImage key={index} publicId={image.public_id} alt={`${selectedName} ${index + 1}`}/>
         ))}
       </div>
     </div>
