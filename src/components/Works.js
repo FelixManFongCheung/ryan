@@ -24,7 +24,7 @@ const Works = () => {
             className={`name-item ${selectedName === collection.folderName ? 'selected' : ''}`}
             onClick={() => setSelectedName(collection.folderName)}
           >
-            {collection.folderName}
+            {`untitled(${collection.folderName})`}
           </span>
         ))}
       </div>
