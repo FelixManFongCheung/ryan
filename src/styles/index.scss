@@ -7,11 +7,13 @@
 
 * {
     font-family: Perpetua, serif;
-    max-width: 1200px;
 }
 
 .content {
     margin-top: 60px;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
     
     @media #{$breakpoint-desktop} {
         margin-left: $global-left;
