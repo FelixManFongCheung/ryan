@@ -29,12 +29,14 @@ exports.handler = async function(event, context) {
             .expression(`folder=${folder.path}`)
             .execute();
 
+          const description = await cloudinary.api.resource(images[0].public_id);
+
+
           return {
             folderName: folder.name.replace(/_/g, ' '),
+            description: description?.context?.custom,
             images: images.map((image) => ({
               public_id: image.public_id,
-              title: image.context && image.context.custom && image.context.custom.alt,
-              description: image.context && image.context.custom && image.context.custom.caption,
             })),
           };
         })

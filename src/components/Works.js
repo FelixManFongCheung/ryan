@@ -4,6 +4,7 @@ import ResponsiveImage from './ResponsiveImage';
 const Works = () => {
   const [collections, setCollections] = useState([]);
   const [selectedName, setSelectedName] = useState();
+  const [checkDescription, setcheckDescription] = useState({});
 
   useEffect(() => {
     const fetchCollection = async () => {
@@ -22,12 +23,21 @@ const Works = () => {
           <span
             key={collection.folderName}
             className={`name-item ${selectedName === collection.folderName ? 'selected' : ''}`}
-            onClick={() => setSelectedName(collection.folderName)}
+            onClick={() => {
+              setSelectedName(collection.folderName);         
+              setcheckDescription(collections.find(collection => collection.folderName === selectedName)?.description ?? null);
+            }}
           >
             {`Untitled (${collection.folderName})`}
           </span>
         ))}
       </div>
+      {checkDescription && (
+        <div className='info'>
+          <div className="title">{checkDescription.alt}</div>
+          <div className="description">{checkDescription.caption}</div>
+        </div>
+      )}
       <div className="gallery">
         {collections.find(collection => collection.folderName === selectedName)?.images.map((image, index) => (   
             <ResponsiveImage key={index} publicId={image.public_id} alt={`${selectedName} ${index + 1}`}/>
