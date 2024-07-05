@@ -24,8 +24,8 @@ const Works = () => {
             key={collection.folderName}
             className={`name-item ${selectedName === collection.folderName ? 'selected' : ''}`}
             onClick={() => {
-              setSelectedName(collection.folderName);         
               setcheckDescription(collections.find(collection => collection.folderName === selectedName)?.description ?? null);
+              setSelectedName(collection.folderName);         
             }}
           >
             {`Untitled (${collection.folderName})`}
