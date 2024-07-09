@@ -34,8 +34,8 @@ const Works = () => {
       
       {checkDescription && (
         <div className='info'>
-          <div className="title">{description.alt}</div>
-          <div className="description">{description.caption}</div>
+          <div className="title">{description.caption}</div>
+          <div className="description">{description.alt}</div>
         </div>
       )}
   
