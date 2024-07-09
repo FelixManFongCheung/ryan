@@ -19,7 +19,7 @@ exports.handler = async function(event, context) {
   try {
     let data;
 
-    if (urlSegment == 'works' || urlSegment == 'curatorialprojects') {
+    if (urlSegment == 'works' || urlSegment == 'curatorialprojects' || urlSegment == 'editions') {
       const { folders: subfolders } = await cloudinary.api.sub_folders(`${urlSegment}`);
 
       data = {};

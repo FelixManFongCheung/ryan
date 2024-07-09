@@ -1,57 +1,46 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import ResponsiveImage from './ResponsiveImage';
+import { useSelector, useDispatch } from 'react-redux';
+import { setCollections, setSelectedName } from '../redux/collectionsSlice';
+import Titles from './Titles';
 
 const Works = () => {
-  const [collections, setCollections] = useState({});
-  const [images, setImages] = useState([]);
-  const [selectedName, setSelectedName] = useState();
-  const [checkDescription, setcheckDescription] = useState({});
+  const dispatch = useDispatch();
+  const collections = useSelector((state) => state.collections.collections);
+  const selectedImages = useSelector((state) => state.collections.selectedImages);
+  const titleName = useSelector((state) => state.collections.selectedName);
+  const checkDescription = useSelector((state) => state.collections.descriptionBoolean);
+  const description = useSelector((state) => state.collections.description);
+
 
   useEffect(() => {
-    const fetchCollection = async () => {
+    const fetchCollections = async () => {
         const response = await fetch('/.netlify/functions/cloudinaryFetch');
         console.log('requested');
         const data = await response.json();
-        setCollections(data);
+        dispatch(setCollections(data));
     };
-    fetchCollection();
-  }, []);
-
-  const findItemByFoldername = (foldername) => {
-    return collections[foldername];
-  };
+    fetchCollections();
+  }, [dispatch]);
 
   const handleChangingTitle = async (title) => {
-    setSelectedName(title); 
-    setImages([]);
-    const items = findItemByFoldername(title);
-    const newImages = items.images
-    setImages(newImages);
-    setcheckDescription(items.description ?? null);
+    dispatch(setSelectedName(title));
   };
 
   return (
     <div className="work content">
-      <div className="work-names">
-        {Object.entries(collections).map(([foldername, item]) => (
-          <span
-            key={foldername}
-            className={`name-item ${selectedName === foldername ? 'selected' : ''}`}
-            onClick={() => handleChangingTitle(foldername)}
-          >
-            {`Untitled (${foldername})`}
-          </span>
-        ))}
-      </div>
+      <Titles collections={collections} titleName={titleName} handleChangingTitle={handleChangingTitle} />
+      
       {checkDescription && (
         <div className='info'>
-          <div className="title">{checkDescription.alt}</div>
-          <div className="description">{checkDescription.caption}</div>
+          <div className="title">{description.alt}</div>
+          <div className="description">{description.caption}</div>
         </div>
       )}
+  
       <div className="gallery">
-        {images.map((image, index) => (   
-            <ResponsiveImage key={index} publicId={image.public_id} alt={`${selectedName} ${index + 1}`}/>
+        {selectedImages.map((image, index) => (   
+            <ResponsiveImage key={index} publicId={image.public_id} alt={`${titleName} ${index + 1}`}/>
         ))}
       </div>
     </div>

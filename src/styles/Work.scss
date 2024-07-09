@@ -18,6 +18,10 @@
         // max-width: 1200px;
         margin-left: auto;
         margin-bottom: 50px;
+        @media (max-width: 768px) {
+            margin: 0 auto; 
+            margin-bottom: 30px;
+        }
     }
 
     .gallery {

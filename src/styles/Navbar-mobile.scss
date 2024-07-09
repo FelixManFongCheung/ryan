@@ -3,16 +3,18 @@
     @include bp-only(mobo);
     top: 5px;
     position: relative;
+    position: fixed;
+    z-index: 2;
 
 
     .font-alter {
       font-size: 30px;
       line-height: 15px;
-      margin-right: 0;
+      margin-left: 10px;
     }
 
     .nav-overlay{
-      position:fixed;
+      position: inherit;
       opacity: 0;
       visibility: hidden;
       z-index:2;
