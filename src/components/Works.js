@@ -12,9 +12,7 @@ const Works = () => {
         const response = await fetch('/.netlify/functions/cloudinaryFetch');
         console.log('requested');
         const data = await response.json();
-        console.log(data);
         setCollections(data);
-        console.log(collections);
     };
     fetchCollection();
   }, []);
