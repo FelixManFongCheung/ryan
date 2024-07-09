@@ -19,7 +19,7 @@ const Works = () => {
         console.log('requested');
         const data = await response.json();
         dispatch(setCollections(data));
-        console.log(collections);
+        console.log(data);
     };
     fetchCollections();
   }, [dispatch]);
