@@ -25,10 +25,13 @@
     }
 
     .gallery {
-        width: 80%;
+        width: 50%;
         // max-width: 1200px;
         margin-left: auto;
-        @media (max-width: 768px) {margin: 0 auto;}
+        @media (max-width: 768px) {
+            margin: 0 auto;
+            width: 80%;
+        }
 
         .gallery-image {
             width: 100%;
