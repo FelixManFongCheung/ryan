@@ -2,33 +2,46 @@ import React, { useEffect, useState } from 'react';
 import ResponsiveImage from './ResponsiveImage';
 
 const Works = () => {
-  const [collections, setCollections] = useState([]);
+  const [collections, setCollections] = useState({});
+  const [images, setImages] = useState([]);
   const [selectedName, setSelectedName] = useState();
   const [checkDescription, setcheckDescription] = useState({});
 
   useEffect(() => {
     const fetchCollection = async () => {
         const response = await fetch('/.netlify/functions/cloudinaryFetch');
+        console.log('requested');
         const data = await response.json();
         console.log(data);
         setCollections(data);
+        console.log(collections);
     };
     fetchCollection();
   }, []);
 
+  const findItemByFoldername = (foldername) => {
+    return collections[foldername];
+  };
+
+  const handleChangingTitle = async (title) => {
+    setSelectedName(title); 
+    setImages([]);
+    const items = findItemByFoldername(title);
+    const newImages = items.images
+    setImages(newImages);
+    setcheckDescription(items.description ?? null);
+  };
+
   return (
     <div className="work content">
       <div className="work-names">
-        {collections.map((collection, index) => (
+        {Object.entries(collections).map(([foldername, item]) => (
           <span
-            key={collection.folderName}
-            className={`name-item ${selectedName === collection.folderName ? 'selected' : ''}`}
-            onClick={() => {
-              setcheckDescription(collections.find(collection => collection.folderName === selectedName)?.description ?? null);
-              setSelectedName(collection.folderName);         
-            }}
+            key={foldername}
+            className={`name-item ${selectedName === foldername ? 'selected' : ''}`}
+            onClick={() => handleChangingTitle(foldername)}
           >
-            {`Untitled (${collection.folderName})`}
+            {`Untitled (${foldername})`}
           </span>
         ))}
       </div>
@@ -39,7 +52,7 @@ const Works = () => {
         </div>
       )}
       <div className="gallery">
-        {collections.find(collection => collection.folderName === selectedName)?.images.map((image, index) => (   
+        {images.map((image, index) => (   
             <ResponsiveImage key={index} publicId={image.public_id} alt={`${selectedName} ${index + 1}`}/>
         ))}
       </div>

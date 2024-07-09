@@ -18,7 +18,7 @@ const ResponsiveImage = ({ publicId }) => {
       cldImg={image}
       plugins={[lazyload()]}
       loading='lazy'
-      className='gallery-image'
+      className='gallery-image image-fade'
     />
   );
 };

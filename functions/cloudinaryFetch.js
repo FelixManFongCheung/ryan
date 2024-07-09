@@ -21,8 +21,10 @@ exports.handler = async function(event, context) {
 
     if (urlSegment == 'works' || urlSegment == 'curatorialprojects') {
       const { folders: subfolders } = await cloudinary.api.sub_folders(`${urlSegment}`);
+      
+      data = {};
 
-      data = await Promise.all(
+      await Promise.all(
         subfolders.map(async (folder) => {
 
           const { resources: images } = await cloudinary.search
@@ -31,9 +33,8 @@ exports.handler = async function(event, context) {
 
           const description = await cloudinary.api.resource(images[0].public_id);
 
-
-          return {
-            folderName: folder.name.replace(/_/g, ' '),
+          let folderName = folder.name.replace(/_/g, ' ');
+          data[folderName] = {
             description: description?.context?.custom,
             images: images.map((image) => ({
               public_id: image.public_id,
@@ -41,7 +42,6 @@ exports.handler = async function(event, context) {
           };
         })
       );
-
     } else if (urlSegment == 'about') {
       data = await cloudinary.api.metadata_field_by_field_id(about);
     } else if (urlSegment == 'contact') {
