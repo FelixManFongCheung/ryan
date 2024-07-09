@@ -21,11 +21,13 @@ exports.handler = async function(event, context) {
 
     if (urlSegment == 'works' || urlSegment == 'curatorialprojects') {
       const { folders: subfolders } = await cloudinary.api.sub_folders(`${urlSegment}`);
-      
+
       data = {};
 
       await Promise.all(
         subfolders.map(async (folder) => {
+
+          console.log('testingggggg');
 
           const { resources: images } = await cloudinary.search
             .expression(`folder=${folder.path}`)
