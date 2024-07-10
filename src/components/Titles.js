@@ -1,7 +1,6 @@
 import React from 'react';
 
 export default function Titles({titleName, collections, handleChangingTitle, editionBoolean}) {
-  console.log(editionBoolean);
   const untitledOpen = editionBoolean ? '' : 'Untitled (' ;
   const untitledClose = editionBoolean ? '' : ')' ;
   return (
