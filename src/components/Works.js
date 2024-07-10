@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setCollections, setSelectedName } from '../redux/collectionsSlice';
 import Titles from './Titles';
 
-const Works = () => {
+const Works = ({editionBoolean}) => {
   const dispatch = useDispatch();
   const collections = useSelector((state) => state.collections.collections);
   const selectedImages = useSelector((state) => state.collections.selectedImages);
@@ -30,7 +30,7 @@ const Works = () => {
 
   return (
     <div className="work content">
-      <Titles collections={collections} titleName={titleName} handleChangingTitle={handleChangingTitle} />
+      <Titles collections={collections} titleName={titleName} handleChangingTitle={handleChangingTitle} editionBoolean={editionBoolean} />
       
       {checkDescription && (
         <div className='info'>

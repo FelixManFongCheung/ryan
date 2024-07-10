@@ -1,6 +1,9 @@
 import React from 'react';
 
-export default function Titles({titleName, collections, handleChangingTitle}) {
+export default function Titles({titleName, collections, handleChangingTitle, editionBoolean}) {
+  console.log(editionBoolean);
+  const untitledOpen = editionBoolean ? '' : 'Untitled (' ;
+  const untitledClose = editionBoolean ? '' : ')' ;
   return (
     <div className="work-names">
         {/* foldername */}
@@ -10,7 +13,7 @@ export default function Titles({titleName, collections, handleChangingTitle}) {
             className={`name-item ${titleName === foldername ? 'selected' : ''}`}
             onClick={() => handleChangingTitle(foldername)}
         >
-            {`Untitled (${foldername})`}
+            {`${untitledOpen}${foldername}${untitledClose}`}
         </span>
         ))}
     </div>

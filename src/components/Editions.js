@@ -3,6 +3,6 @@ import Works from './Works'
 
 export default function Editions() {
   return (
-    <Works/>
+    <Works editionBoolean={true}/>
   )
 }
