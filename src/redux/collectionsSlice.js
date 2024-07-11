@@ -23,8 +23,15 @@ const collectionsSlice = createSlice({
       state.descriptionBoolean = selectedCollection.description ?? false;
       state.description = selectedCollection.description;
     },
+    clearState(state) {
+      state.collections = initialState.collections;
+      state.selectedName = initialState.selectedName;
+      state.selectedImages = initialState.selectedImages;
+      state.descriptionBoolean = initialState.descriptionBoolean;
+      state.description = initialState.description;
+    },
   },
 })
 
-export const { setCollections, setSelectedName } = collectionsSlice.actions;
+export const { setCollections, setSelectedName, clearState } = collectionsSlice.actions;
 export default collectionsSlice.reducer;

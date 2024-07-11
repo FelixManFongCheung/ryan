@@ -21,6 +21,9 @@
     top: 0;
     padding-left: 10px;
     margin: 0;
-    @include bp-only(desktop);
+    @include bp-only(desktop, block);
+    .work-names {
+      display: none;
+    }
   }
 }
