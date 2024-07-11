@@ -5,7 +5,6 @@ export default function Titles({titleName, collections, handleChangingTitle, edi
   const untitledClose = editionBoolean ? '' : ')' ;
   return (
     <div className="work-names">
-        {/* foldername */}
         {Object.entries(collections).map(([foldername, item]) => (
         <span
             key={foldername}

@@ -27,18 +27,53 @@ exports.handler = async function(event, context) {
       await Promise.all(
         subfolders.map(async (folder) => {
 
-          console.log('testingggggg');
-
           const { resources: images } = await cloudinary.search
             .expression(`folder=${folder.path}`)
             .execute();
 
           const description = await cloudinary.api.resource(images[0].public_id);
 
+          function quickSort(arr, direction = 'ascending') {
+            if (arr.length <= 1) {
+                return arr;
+            }
+        
+            function getNumber(item) {
+                const parts = item.public_id.split('/');
+                const imageID = Number(parts[parts.length - 1]);
+                return imageID;
+            }
+            
+            const pivotIndex = Math.floor(arr.length / 2);
+            const pivotID = getNumber(arr[pivotIndex]);
+            const left = [];
+            const right = [];
+            
+            for (let i = 0; i < arr.length; i++) {
+                if (i === pivotIndex) continue; // Skip the pivot element
+                const iterationID = getNumber(arr[i]);
+                if ((direction === 'ascending' && iterationID < pivotID) || 
+                    (direction === 'descending' && iterationID > pivotID)) {
+                    left.push(arr[i]);
+                } else {
+                    right.push(arr[i]);
+                }
+            }
+            
+            return [
+                ...quickSort(left, direction), 
+                arr[pivotIndex], 
+                ...quickSort(right, direction)
+            ];
+          }
+        
+
+          const orderedImages = quickSort(images);
+
           let folderName = folder.name.replace(/_/g, ' ');
           data[folderName] = {
             description: description?.context?.custom,
-            images: images.map((image) => ({
+            images: orderedImages.map((image) => ({
               public_id: image.public_id,
             })),
           };
