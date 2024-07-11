@@ -1,13 +1,24 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { setSelectedName } from '../redux/collectionsSlice';
+import Titles from './Titles';
 
 export default function NavMenu({desktop_menu, toggleNav}) {
+  const dispatch = useDispatch();
+  const collections = useSelector((state) => state.collections.collections);
+  const titleName = useSelector((state) => state.collections.selectedName);
 
   const handleClick = () => {
     if (toggleNav) {
       toggleNav()
     }
   }; 
+
+  const handleChangingTitle = async (title) => {
+    handleClick();
+    dispatch(setSelectedName(title));
+  };
 
 
   return (
@@ -18,6 +29,7 @@ export default function NavMenu({desktop_menu, toggleNav}) {
           <li className='font-alter' onClick={handleClick}><Link title='Editions' to="/Editions">Editions</Link></li>
           <li className='font-alter' onClick={handleClick}><Link title='About' to="/About">About</Link></li>
           <li className='font-alter' onClick={handleClick}><Link title='Contact' to="/Contact">Contact</Link></li>
+          {Object.keys(collections).length !== 0 && <Titles navMenu={true} collections={collections} titleName={titleName} handleChangingTitle={handleChangingTitle} />}
     </ul>
   )
 }

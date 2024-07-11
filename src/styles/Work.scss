@@ -3,10 +3,11 @@
     flex-direction: column;
 
     .work-names {
-        display: flex;
+        display: none;
         flex-direction: column;
         position: fixed;
         z-index: 1;
+        @include bp-only(desktop, flex);
 
         .name-item {
             display: block;

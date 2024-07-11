@@ -1,6 +1,8 @@
+$margin-titles: 15px;
+
 .mobo-nav {
     display:none;
-    @include bp-only(mobo);
+    @include bp-only(mobo, block);
     top: 5px;
     position: relative;
     position: fixed;
@@ -50,12 +52,34 @@
         height:100%;
         padding: 0;
         text-align: left;
-        gap: 10px;
+        gap: $margin-titles;
 
         li {
           margin-left: 10px;
           font-size: 30px;
           line-height: 15px;
+        }
+
+        .work-names {
+          position: relative;
+          margin-top: $margin-titles;
+          .font-alter {
+            font-size: 25px;
+            line-height: 20px;
+            letter-spacing: -3px;
+            margin-right: 20px;
+          }
+          &::before {
+            content: ''; 
+            position: absolute;
+            top: 0px; 
+            left: 50%;
+            transform: translate(-50%, 0); 
+            width: 80%;
+            height: 1px; /* Thickness of the border */
+            border-top: 1px solid black; /* Border style */
+            margin-top: -$margin-titles; /* Margin only on the border */
+          }          
         }
       }
 
