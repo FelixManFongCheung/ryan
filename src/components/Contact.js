@@ -16,7 +16,7 @@ export default function Contact() {
 
   return (
     <div className='content'>
-      <div className="instagram">{instagram}</div>
+      <a href='https://www.instagram.com/ryanmoyii_' className="instagram">{instagram}</a >
       <div className="email">{email}</div>
     </div>
   )
