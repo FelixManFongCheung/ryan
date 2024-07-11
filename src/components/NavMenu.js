@@ -29,7 +29,7 @@ export default function NavMenu({desktop_menu, toggleNav}) {
           <li className='font-alter' onClick={handleClick}><Link title='Editions' to="/Editions">Editions</Link></li>
           <li className='font-alter' onClick={handleClick}><Link title='About' to="/About">About</Link></li>
           <li className='font-alter' onClick={handleClick}><Link title='Contact' to="/Contact">Contact</Link></li>
-          <Titles navMenu={true} collections={collections} titleName={titleName} handleChangingTitle={handleChangingTitle} />
+          {Object.keys(collections).length !== 0 && <Titles navMenu={true} collections={collections} titleName={titleName} handleChangingTitle={handleChangingTitle} />}
     </ul>
   )
 }
