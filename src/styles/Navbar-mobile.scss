@@ -42,20 +42,23 @@ $margin-titles: 15px;
       opacity: 0;
       visibility: hidden;
       z-index:2;
+      overflow-y: auto;
 
 
       .nav-menu{
         position: relative;
-        display:flex;
-        flex-direction: column;
         width:100%;
         height:100%;
         padding: 0;
         text-align: left;
-        gap: $margin-titles;
+
+        .menu-titles {
+          margin-bottom: calc($margin-titles * 2);          
+        }
 
         li {
           margin-left: 10px;
+          width: 100%;
           font-size: 30px;
           line-height: 15px;
         }
