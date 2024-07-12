@@ -42,7 +42,7 @@ const Works = ({editionBoolean}) => {
   
       <div className="gallery">
         {selectedImages.map((image, index) => (   
-            <ResponsiveImage key={index} publicId={image.public_id} url={image.url} alt={`${titleName} ${index + 1}`}/>
+            <ResponsiveImage key={index} url={image.url} alt={`${titleName} ${index + 1}`}/>
         ))}
       </div>
     </div>

@@ -75,7 +75,6 @@ exports.handler = async function(event, context) {
           data[folderName] = {
             description: description?.context?.custom,
             images: orderedImages.map((image) => ({
-              public_id: image.public_id,
               url: image.secure_url
             })),
           };

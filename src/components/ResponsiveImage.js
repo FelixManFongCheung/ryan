@@ -4,7 +4,7 @@ import 'react-lazy-load-image-component/src/effects/blur.css';
 
 
 
-const ResponsiveImage = ({ publicId, url }) => {
+const ResponsiveImage = ({ url }) => {
   const intrinsicWidth = 1000;
   const correctedURL = url.replace('/upload/', `/upload/w_${intrinsicWidth},c_scale,q_auto:best/`);
 
