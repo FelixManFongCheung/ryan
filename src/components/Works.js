@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import ResponsiveImage from './ResponsiveImage';
 import { useSelector, useDispatch } from 'react-redux';
-import { setCollections, setSelectedName } from '../redux/collectionsSlice';
+import { setCollections, setSelectedName, clearImages } from '../redux/collectionsSlice';
 import Titles from './Titles';
 
 const Works = ({editionBoolean}) => {
@@ -15,7 +15,7 @@ const Works = ({editionBoolean}) => {
 
   useEffect(() => {
     const fetchCollections = async () => {
-        const response = await fetch('/.netlify/functions/cloudinaryFetch');
+      const response = await fetch('/.netlify/functions/cloudinaryFetch');
         console.log('requested');
         const data = await response.json();
         dispatch(setCollections(data));
@@ -25,6 +25,7 @@ const Works = ({editionBoolean}) => {
   }, [dispatch]);
 
   const handleChangingTitle = async (title) => {
+    dispatch(clearImages());
     dispatch(setSelectedName(title));
   };
 
@@ -41,7 +42,7 @@ const Works = ({editionBoolean}) => {
   
       <div className="gallery">
         {selectedImages.map((image, index) => (   
-            <ResponsiveImage key={index} publicId={image.public_id} alt={`${titleName} ${index + 1}`}/>
+            <ResponsiveImage key={index} publicId={image.public_id} url={image.url} alt={`${titleName} ${index + 1}`}/>
         ))}
       </div>
     </div>

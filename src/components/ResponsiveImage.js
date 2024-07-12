@@ -1,24 +1,22 @@
 import React from 'react';
-import { AdvancedImage, lazyload } from '@cloudinary/react';
-import { CloudinaryImage } from '@cloudinary/url-gen/assets/CloudinaryImage';
-import { Resize } from "@cloudinary/url-gen/actions/resize";
-import { quality } from '@cloudinary/url-gen/actions/delivery';
-import { format } from '@cloudinary/url-gen/actions/delivery';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 
 
 
-const ResponsiveImage = ({ publicId }) => {
-  // Create a CloudinaryImage instance
-  const image = new CloudinaryImage(publicId, { cloudName: process.env.REACT_APP_CLOUDINARY_NAME });
-  
-  image.resize(Resize.scale().width(1000)).delivery(quality('auto:best')).delivery(format('auto'))
+const ResponsiveImage = ({ publicId, url }) => {
+  const intrinsicWidth = 1000;
+  const correctedURL = url.replace('/upload/', `/upload/w_${intrinsicWidth},c_scale,q_auto:best/`);
 
   return (
-    <AdvancedImage
-      cldImg={image}
-      plugins={[lazyload()]}
-      loading='lazy'
-      className='gallery-image image-fade'
+    <LazyLoadImage 
+      src={correctedURL} 
+      className='gallery-image image-fade' 
+      alt="ryan's work"
+      wrapperProps={{
+        style: {transitionDelay: "1s"},
+      }}
+      effect="blur"
     />
   );
 };

@@ -69,12 +69,14 @@ exports.handler = async function(event, context) {
         
 
           const orderedImages = quickSort(images);
+          console.log(orderedImages);
 
           let folderName = folder.name.replace(/_/g, ' ');
           data[folderName] = {
             description: description?.context?.custom,
             images: orderedImages.map((image) => ({
               public_id: image.public_id,
+              url: image.secure_url
             })),
           };
         })

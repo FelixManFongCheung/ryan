@@ -30,8 +30,11 @@ const collectionsSlice = createSlice({
       state.descriptionBoolean = initialState.descriptionBoolean;
       state.description = initialState.description;
     },
+    clearImages: (state) => {
+      state.selectedImages = [];
+    },
   },
 })
 
-export const { setCollections, setSelectedName, clearState } = collectionsSlice.actions;
+export const { setCollections, setSelectedName, clearState, clearImages } = collectionsSlice.actions;
 export default collectionsSlice.reducer;
