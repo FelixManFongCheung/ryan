@@ -51,14 +51,17 @@ $margin-titles: 15px;
         height:100%;
         padding: 0;
         text-align: left;
+        margin-top: 5px;
 
         .menu-titles {
-          margin-bottom: calc($margin-titles * 2);          
+          margin-bottom: calc($margin-titles * 2);    
+          display: flex;      
+          flex-direction: column;
+          gap: 5px;
         }
 
-        li {
+        .font-alter {
           margin-left: 10px;
-          width: 100%;
           font-size: 30px;
           line-height: 15px;
         }
@@ -66,6 +69,9 @@ $margin-titles: 15px;
         .work-names {
           position: relative;
           margin-top: $margin-titles;
+          display: flex;
+          flex-direction: column;
+          gap: 5px;
           .font-alter {
             font-size: 25px;
             line-height: 20px;
@@ -79,9 +85,9 @@ $margin-titles: 15px;
             left: 50%;
             transform: translate(-50%, 0); 
             width: 80%;
-            height: 1px; /* Thickness of the border */
-            border-top: 1px solid black; /* Border style */
-            margin-top: -$margin-titles; /* Margin only on the border */
+            height: 1px; 
+            border-top: 1px solid black; 
+            margin-top: -$margin-titles; 
           }          
         }
       }
