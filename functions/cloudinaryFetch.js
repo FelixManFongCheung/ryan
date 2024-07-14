@@ -69,7 +69,6 @@ exports.handler = async function(event, context) {
         
 
           const orderedImages = quickSort(images);
-          console.log(orderedImages);
 
           let folderName = folder.name.replace(/_/g, ' ');
           data[folderName] = {

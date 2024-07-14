@@ -18,9 +18,20 @@ const Works = ({editionBoolean}) => {
     const fetchCollections = async () => {
       const response = await fetch('/.netlify/functions/cloudinaryFetch');
         console.log('requested');
-        const data = await response.json();
-        dispatch(setCollections(data));
-        console.log(data);
+        const data = await response.json();        
+        const sortedKeys = Object.keys(data).sort((a, b) => {
+          const numA = parseInt(a.split(' ')[0]);
+          const numB = parseInt(b.split(' ')[0]);          
+          return numA - numB;
+        });
+        
+        const orderedItems = {};
+        sortedKeys.forEach(key => {
+          const name = key.split(' ').slice(1).join(' ');
+          orderedItems[name] = data[key];
+        });
+        
+        dispatch(setCollections(orderedItems));
     };
     fetchCollections();
   }, [dispatch]);
