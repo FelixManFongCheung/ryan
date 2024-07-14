@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import ResponsiveImage from './ResponsiveImage';
 import { useSelector, useDispatch } from 'react-redux';
-import { setCollections, setSelectedName, clearImages } from '../redux/collectionsSlice';
+import { setCollections, setSelectedName, clearImages, clearState } from '../redux/collectionsSlice';
 import Titles from './Titles';
 
 const Works = ({editionBoolean}) => {
@@ -14,6 +14,7 @@ const Works = ({editionBoolean}) => {
 
 
   useEffect(() => {
+    dispatch(clearState());
     const fetchCollections = async () => {
       const response = await fetch('/.netlify/functions/cloudinaryFetch');
         console.log('requested');
