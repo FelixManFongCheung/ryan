@@ -47,9 +47,9 @@ const Works = ({editionBoolean}) => {
       
       {checkDescription && (
         <div className='info'>
-          <div className="title">{description.caption}</div>
-          <div className="description">{description.alt}</div>
-          <div className="dimension">{description.dimension}</div>
+          <div className="title" dangerouslySetInnerHTML={{ __html: description.caption }}></div>
+          <div className="description" dangerouslySetInnerHTML={{ __html: description.alt }}></div>
+          <div className="dimension" dangerouslySetInnerHTML={{ __html: description.dimension }}></div>
         </div>
       )}
   
