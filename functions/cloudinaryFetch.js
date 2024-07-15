@@ -82,7 +82,6 @@ exports.handler = async function(event, context) {
     } else if (urlSegment == 'about') {
       let aboutParagraph = about.split(',');
       aboutParagraph = await Promise.all(aboutParagraph.map(async (para) => {
-        console.log(para);
         return await cloudinary.api.metadata_field_by_field_id(para);        
       }))
       data = aboutParagraph;
