@@ -1,4 +1,7 @@
 .contact {
     font-size: 16px;
     line-height: 2;
+    @media (max-width: 768px) {
+        margin-left: 10px;
+    }
 }
