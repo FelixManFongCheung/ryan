@@ -23,10 +23,6 @@ export default function Home() {
   }, [dispatch, location]);
 
   const backgroundImageStyle = {
-    backgroundImage: `url(${img.url})`,
-    backgroundSize: 'cover',
-    backgroundPosition: 'center', 
-    backgroundRepeat: 'no-repeat',
     width: '100vw',
     height: '100vh',
     margin: '0',
@@ -35,7 +31,7 @@ export default function Home() {
   return (
     <LazyLoadImage 
       src={img.url} 
-      className='content' 
+      className='content bg-img' 
       alt="ryan's work"
       style={backgroundImageStyle}
       wrapperProps={{
