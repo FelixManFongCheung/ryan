@@ -17,7 +17,6 @@ const Works = ({editionBoolean}) => {
     dispatch(clearState());
     const fetchCollections = async () => {
       const response = await fetch('/.netlify/functions/cloudinaryFetch');
-        console.log('requested');
         const data = await response.json();        
         const sortedKeys = Object.keys(data).sort((a, b) => {
           const numA = parseInt(a.split(' ')[0]);
@@ -30,7 +29,6 @@ const Works = ({editionBoolean}) => {
           const name = key.split(' ').slice(1).join(' ');
           orderedItems[name] = data[key];
         });
-        console.log(orderedItems);
         dispatch(setCollections(orderedItems));
         dispatch(setSelectedName(Object.keys(orderedItems)[0]))
     };
