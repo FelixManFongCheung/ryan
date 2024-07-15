@@ -32,6 +32,7 @@ const Works = ({editionBoolean}) => {
         });
         console.log(orderedItems);
         dispatch(setCollections(orderedItems));
+        dispatch(setSelectedName(Object.keys(orderedItems)[0]))
     };
     fetchCollections();
   }, [dispatch]);
