@@ -27,7 +27,7 @@ export default function Home() {
     backgroundRepeat: 'no-repeat',
     width: '100vw',
     height: '100vh',
-    marginTop: '0',
+    margin: '0',
   };
   
   return (
