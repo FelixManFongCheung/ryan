@@ -72,6 +72,8 @@ $margin-titles: 15px;
           display: flex;
           flex-direction: column;
           gap: 5px;
+          cursor: pointer;
+
           .font-alter {
             font-size: 25px;
             line-height: 20px;
