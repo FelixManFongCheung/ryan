@@ -3,11 +3,14 @@ import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { setSelectedName } from '../redux/collectionsSlice';
 import Titles from './Titles';
+import { useMatch } from 'react-router-dom';
+
 
 export default function NavMenu({desktop_menu, toggleNav}) {
   const dispatch = useDispatch();
   const collections = useSelector((state) => state.collections.collections);
   const titleName = useSelector((state) => state.collections.selectedName);
+  const match = useMatch("/Editions");
 
   const handleClick = () => {
     if (toggleNav) {
@@ -31,7 +34,7 @@ export default function NavMenu({desktop_menu, toggleNav}) {
             <div className='font-alter' onClick={handleClick}><Link title='About' to="/About">About</Link></div>
             <div className='font-alter' onClick={handleClick}><Link title='Contact' to="/Contact">Contact</Link></div>
           </div>
-          {Object.keys(collections).length !== 0 && <Titles navMenu={true} collections={collections} titleName={titleName} handleChangingTitle={handleChangingTitle} editionBoolean={true} />}
+          {Object.keys(collections).length !== 0 && <Titles navMenu={true} collections={collections} titleName={titleName} handleChangingTitle={handleChangingTitle} editionBoolean={match && true} />}
     </div>
   )
 }
