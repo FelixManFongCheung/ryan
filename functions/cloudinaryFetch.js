@@ -94,6 +94,9 @@ exports.handler = async function(event, context) {
         instagram: insta,
         email: mail
       }
+    } else {
+      const img = await cloudinary.api.resource('ryan/Seems Like It\'s Been Forever That You\'ve Been Gone/1')
+      data = img;
     }
 
     return {
