@@ -21,7 +21,7 @@ export default function Contact() {
   }, [dispatch, location]);
   
   return (
-    <div className='content'>
+    <div className='content contact'>
       <a href='https://www.instagram.com/ryanmoyii_' target="_blank" rel="noreferrer" className="instagram">{instagram}</a >
       <div className="email">{email}</div>
     </div>
