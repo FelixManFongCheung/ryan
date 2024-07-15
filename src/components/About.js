@@ -21,7 +21,6 @@ export default function About() {
 
   return (
     <div className='content name'>
-      {about.external_id}
       {about.default_value}
     </div>
   )
