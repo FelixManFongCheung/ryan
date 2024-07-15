@@ -30,7 +30,7 @@ const Works = ({editionBoolean}) => {
           const name = key.split(' ').slice(1).join(' ');
           orderedItems[name] = data[key];
         });
-        
+        console.log(orderedItems);
         dispatch(setCollections(orderedItems));
     };
     fetchCollections();
@@ -49,6 +49,7 @@ const Works = ({editionBoolean}) => {
         <div className='info'>
           <div className="title">{description.caption}</div>
           <div className="description">{description.alt}</div>
+          <div className="dimension">{description.dimension}</div>
         </div>
       )}
   

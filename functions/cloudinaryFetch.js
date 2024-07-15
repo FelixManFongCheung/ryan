@@ -75,7 +75,6 @@ exports.handler = async function(event, context) {
             description: description?.context?.custom,
             images: orderedImages.map((image) => ({
               url: image.secure_url,
-              dimension: image.context?.custom.dimension
             })),
           };
         })
