@@ -27,11 +27,11 @@ exports.handler = async function(event, context) {
       await Promise.all(
         subfolders.map(async (folder) => {
 
-          const { resources: images } = await cloudinary.search
-            .expression(`folder=${folder.path}`)
-            .execute();
 
-          const description = await cloudinary.api.resource(images[0].public_id);
+            const images = await cloudinary.api.resources_by_asset_folder(folder.path, 
+            { tags: true, metadata: true, context: true });
+
+          const description = await cloudinary.api.resource(images.resources[0].public_id);
 
           function quickSort(arr, direction = 'ascending') {
             if (arr.length <= 1) {
@@ -68,13 +68,14 @@ exports.handler = async function(event, context) {
           }
         
 
-          const orderedImages = quickSort(images);
+          const orderedImages = quickSort(images.resources);
 
           let folderName = folder.name.replace(/_/g, ' ');
           data[folderName] = {
             description: description?.context?.custom,
             images: orderedImages.map((image) => ({
-              url: image.secure_url
+              url: image.secure_url,
+              dimension: image.context?.custom.dimension
             })),
           };
         })
