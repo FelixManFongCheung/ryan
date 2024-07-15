@@ -10,7 +10,8 @@ export default function NavMenu({desktop_menu, toggleNav}) {
   const dispatch = useDispatch();
   const collections = useSelector((state) => state.collections.collections);
   const titleName = useSelector((state) => state.collections.selectedName);
-  const match = useMatch("/Editions");
+  const matchEdition = useMatch("/Editions");
+  const matchCuratorial = useMatch("/CuratorialProjects");
 
   const handleClick = () => {
     if (toggleNav) {
@@ -34,7 +35,7 @@ export default function NavMenu({desktop_menu, toggleNav}) {
             <div className='font-alter' onClick={handleClick}><Link title='About' to="/About">About</Link></div>
             <div className='font-alter' onClick={handleClick}><Link title='Contact' to="/Contact">Contact</Link></div>
           </div>
-          {Object.keys(collections).length !== 0 && <Titles navMenu={true} collections={collections} titleName={titleName} handleChangingTitle={handleChangingTitle} editionBoolean={match && true} />}
+          {Object.keys(collections).length !== 0 && <Titles navMenu={true} collections={collections} titleName={titleName} handleChangingTitle={handleChangingTitle} editionBoolean={matchEdition ||  matchCuratorial && true} />}
     </div>
   )
 }
