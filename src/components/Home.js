@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { clearState, setHomeIMG } from '../redux/collectionsSlice'; 
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 
 export default function Home() {
   const location = useLocation();
@@ -31,7 +33,15 @@ export default function Home() {
   };
   
   return (
-    <div className='content' style={backgroundImageStyle}>
-    </div>
+    <LazyLoadImage 
+      src={img.url} 
+      className='content' 
+      alt="ryan's work"
+      style={backgroundImageStyle}
+      wrapperProps={{
+        style: {transitionDelay: "1s"},
+      }}
+      effect="blur"
+    /> 
   )
 }
