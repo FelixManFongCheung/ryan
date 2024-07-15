@@ -6,7 +6,8 @@ const initialState = {
   selectedName: null,
   selectedImages: [],
   descriptionBoolean: false,
-  description: null
+  description: null,
+  about: []
 };
 
 const collectionsSlice = createSlice({
@@ -15,6 +16,9 @@ const collectionsSlice = createSlice({
   reducers: {
     setCollections(state, action) {
       state.collections = action.payload;
+    },
+    setAbout(state, action) {
+      state.about = action.payload;
     },
     setSelectedName(state, action) {
       const selectedCollection = current(state).collections[action.payload];
@@ -36,5 +40,5 @@ const collectionsSlice = createSlice({
   },
 })
 
-export const { setCollections, setSelectedName, clearState, clearImages } = collectionsSlice.actions;
+export const { setCollections, setSelectedName, setAbout, clearState, clearImages } = collectionsSlice.actions;
 export default collectionsSlice.reducer;
