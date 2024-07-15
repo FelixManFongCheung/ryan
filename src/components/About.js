@@ -24,8 +24,7 @@ export default function About() {
     <div className='content name'>
       {abouts.map((about, index) => (
         <>
-        <div key={index}>
-          {about.default_value}
+        <div key={index} dangerouslySetInnerHTML={{ __html: about.default_value }}>
         </div>
         <br />
         </>
