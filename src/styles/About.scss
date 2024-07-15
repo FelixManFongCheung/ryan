@@ -3,6 +3,9 @@
     width: 50%;
     line-height: 2;
     text-align: justify;
+    @media (max-width: 768px) {
+        width: 80%;
+    }
 }
 
 .content {
