@@ -38,6 +38,10 @@ const Works = ({editionBoolean}) => {
   const handleChangingTitle = async (title) => {
     dispatch(clearImages());
     dispatch(setSelectedName(title));
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+  });
   };
 
   return (
