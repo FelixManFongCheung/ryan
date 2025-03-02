@@ -95,8 +95,28 @@ exports.handler = async function (event, context) {
         email: mail
       }
     } else {
-      const img = await cloudinary.api.resource('home/works/assets/Haarlem_Roomview_gydkoi');
-      data = img;
+      try {
+        // First, let's list all resources to see what's available
+        const result = await cloudinary.api.resources({
+          type: 'upload',
+          prefix: 'home', // Start searching from the home folder
+          max_results: 500
+        });
+
+        // Log available resources to see the correct paths
+        console.log('Available resources:',
+          result.resources.map(r => r.public_id)
+        );
+
+        // Once you see the correct path in the logs, use it here
+        const img = await cloudinary.api.resource('Haarlem_Roomview_gydkoi');
+        // or maybe it's just in the works folder:
+        // const img = await cloudinary.api.resource('works/Haarlem_Roomview_gydkoi');
+
+        data = img;
+      } catch (error) {
+        console.log('Error details:', error);
+      }
     }
 
     return {
