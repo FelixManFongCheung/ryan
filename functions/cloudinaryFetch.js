@@ -11,7 +11,7 @@ const about = process.env.ABOUT;
 const instagram = process.env.INSTAGRAM;
 const email = process.env.EMAIL;
 
-exports.handler = async function(event, context) {
+exports.handler = async function (event, context) {
   const url = new URL(event.headers.referer);
   const segments = url.pathname.split('/');
   const urlSegment = segments.pop().toLowerCase();
@@ -19,7 +19,7 @@ exports.handler = async function(event, context) {
   try {
     let data;
 
-    if (urlSegment == 'works' || urlSegment == 'curatorialprojects' || urlSegment == 'editions') {
+    if (urlSegment === 'works' || urlSegment === 'curatorialprojects' || urlSegment === 'editions') {
       const { folders: subfolders } = await cloudinary.api.sub_folders(`${urlSegment}`);
 
       data = {};
@@ -28,45 +28,45 @@ exports.handler = async function(event, context) {
         subfolders.map(async (folder) => {
 
 
-            const images = await cloudinary.api.resources_by_asset_folder(folder.path, 
+          const images = await cloudinary.api.resources_by_asset_folder(folder.path,
             { tags: true, metadata: true, context: true });
 
           const description = await cloudinary.api.resource(images.resources[0].public_id);
 
           function quickSort(arr, direction = 'ascending') {
             if (arr.length <= 1) {
-                return arr;
+              return arr;
             }
-        
+
             function getNumber(item) {
-                const parts = item.public_id.split('/');
-                const imageID = Number(parts[parts.length - 1]);
-                return imageID;
+              const parts = item.public_id.split('/');
+              const imageID = Number(parts[parts.length - 1]);
+              return imageID;
             }
-            
+
             const pivotIndex = Math.floor(arr.length / 2);
             const pivotID = getNumber(arr[pivotIndex]);
             const left = [];
             const right = [];
-            
+
             for (let i = 0; i < arr.length; i++) {
-                if (i === pivotIndex) continue; // Skip the pivot element
-                const iterationID = getNumber(arr[i]);
-                if ((direction === 'ascending' && iterationID < pivotID) || 
-                    (direction === 'descending' && iterationID > pivotID)) {
-                    left.push(arr[i]);
-                } else {
-                    right.push(arr[i]);
-                }
+              if (i === pivotIndex) continue; // Skip the pivot element
+              const iterationID = getNumber(arr[i]);
+              if ((direction === 'ascending' && iterationID < pivotID) ||
+                (direction === 'descending' && iterationID > pivotID)) {
+                left.push(arr[i]);
+              } else {
+                right.push(arr[i]);
+              }
             }
-            
+
             return [
-                ...quickSort(left, direction), 
-                arr[pivotIndex], 
-                ...quickSort(right, direction)
+              ...quickSort(left, direction),
+              arr[pivotIndex],
+              ...quickSort(right, direction)
             ];
           }
-        
+
 
           const orderedImages = quickSort(images.resources);
 
@@ -79,13 +79,13 @@ exports.handler = async function(event, context) {
           };
         })
       );
-    } else if (urlSegment == 'about') {
+    } else if (urlSegment === 'about') {
       let aboutParagraph = about.split(',');
       aboutParagraph = await Promise.all(aboutParagraph.map(async (para) => {
-        return await cloudinary.api.metadata_field_by_field_id(para);        
+        return await cloudinary.api.metadata_field_by_field_id(para);
       }))
       data = aboutParagraph;
-    } else if (urlSegment == 'contact') {
+    } else if (urlSegment === 'contact') {
       const [insta, mail] = await Promise.all([
         cloudinary.api.metadata_field_by_field_id(instagram),
         cloudinary.api.metadata_field_by_field_id(email),
@@ -109,6 +109,6 @@ exports.handler = async function(event, context) {
       statusCode: 500,
       body: JSON.stringify({ error: 'Failed to fetch images' }),
     };
-  }  
+  }
 }
 
