@@ -95,7 +95,7 @@ exports.handler = async function (event, context) {
         email: mail
       }
     } else {
-      const img = await cloudinary.api.resource('works/Haarlem_Roomview_gydkoi.webp')
+      const img = await cloudinary.api.resource('home/works/assets/Haarlem_Roomview_gydkoi');
       data = img;
     }
 
