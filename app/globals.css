@@ -1,0 +1,43 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply font-perpetua;
+  }
+
+  a {
+    @apply text-black no-underline;
+  }
+}
+
+@layer components {
+  .font-alter {
+    @apply inline-block cursor-pointer overflow-hidden leading-[12px];
+  }
+
+  .font-alter a {
+    @apply mr-5 tracking-tightest;
+  }
+
+  .page-content {
+    @apply mx-auto mt-nav-offset max-w-site;
+  }
+
+  @media (min-width: 768px) {
+    .page-content {
+      @apply mx-global;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .page-content {
+      @apply ml-global;
+    }
+  }
+
+  .bg-img {
+    @apply absolute left-0 top-0 m-0 h-screen w-screen object-cover;
+  }
+}
