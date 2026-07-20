@@ -7,6 +7,7 @@ export function orderCollections(data: CollectionsMap): CollectionsMap {
     return numA - numB;
   });
 
+
   const orderedItems: CollectionsMap = {};
   sortedKeys.forEach((key) => {
     const name = key.split(' ').slice(1).join(' ');

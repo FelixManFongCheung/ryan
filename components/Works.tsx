@@ -1,14 +1,14 @@
-'use client';
+"use client";
 
-import { useEffect } from 'react';
-import ResponsiveImage from './ResponsiveImage';
-import Titles from './Titles';
-import { orderCollections } from '@/lib/orderCollections';
-import { useCollectionsStore } from '@/lib/store';
-import type { CollectionsMap } from '@/lib/types';
+import { orderCollections } from "@/lib/orderCollections";
+import { useCollectionsStore } from "@/lib/store";
+import type { CollectionsMap } from "@/lib/types";
+import { useEffect } from "react";
+import ResponsiveImage from "./ResponsiveImage";
+import Titles from "./Titles";
 
 type WorksProps = {
-  segment: 'works' | 'editions' | 'curatorialprojects';
+  segment: "works" | "editions" | "curatorialprojects";
   editionBoolean?: boolean;
 };
 
@@ -29,6 +29,7 @@ export default function Works({ segment, editionBoolean }: WorksProps) {
       const response = await fetch(`/api/cloudinary/${segment}`);
       const data = (await response.json()) as CollectionsMap;
       const orderedItems = orderCollections(data);
+      console.log(orderedItems);
       setCollections(orderedItems);
       const firstName = Object.keys(orderedItems)[0];
       if (firstName) {
@@ -44,7 +45,7 @@ export default function Works({ segment, editionBoolean }: WorksProps) {
     setSelectedName(title);
     window.scrollTo({
       top: 0,
-      behavior: 'smooth',
+      behavior: "smooth",
     });
   };
 
@@ -61,15 +62,15 @@ export default function Works({ segment, editionBoolean }: WorksProps) {
         <div className="info mb-[50px] ml-auto w-3/5 text-[15px] max-[478px]:text-[8px] max-desktop:mx-auto max-desktop:mb-[30px] max-desktop:w-4/5 max-desktop:text-[10px]">
           <div
             className="title"
-            dangerouslySetInnerHTML={{ __html: description.caption ?? '' }}
+            dangerouslySetInnerHTML={{ __html: description.caption ?? "" }}
           />
           <div
             className="description"
-            dangerouslySetInnerHTML={{ __html: description.alt ?? '' }}
+            dangerouslySetInnerHTML={{ __html: description.alt ?? "" }}
           />
           <div
             className="dimension"
-            dangerouslySetInnerHTML={{ __html: description.dimension ?? '' }}
+            dangerouslySetInnerHTML={{ __html: description.dimension ?? "" }}
           />
         </div>
       )}
@@ -79,7 +80,7 @@ export default function Works({ segment, editionBoolean }: WorksProps) {
           <ResponsiveImage
             key={`${image.url}-${index}`}
             url={image.url}
-            alt={`${titleName ?? 'work'} ${index + 1}`}
+            alt={`${titleName ?? "work"} ${index + 1}`}
           />
         ))}
       </div>
