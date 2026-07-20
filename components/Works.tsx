@@ -29,7 +29,6 @@ export default function Works({ segment, editionBoolean }: WorksProps) {
       const response = await fetch(`/api/cloudinary/${segment}`);
       const data = (await response.json()) as CollectionsMap;
       const orderedItems = orderCollections(data);
-      console.log(orderedItems);
       setCollections(orderedItems);
       const firstName = Object.keys(orderedItems)[0];
       if (firstName) {
