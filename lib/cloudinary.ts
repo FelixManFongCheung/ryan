@@ -25,7 +25,9 @@ type CloudinaryResource = {
 
 function getImageNumber(item: CloudinaryResource): number {
   const parts = item.public_id.split('/');
-  return Number(parts[parts.length - 1]);
+  const basename = parts[parts.length - 1] ?? '';
+  const match = basename.match(/(\d+)$/);
+  return match ? Number(match[1]) : Number.POSITIVE_INFINITY;
 }
 
 function quickSort(
