@@ -1,6 +1,6 @@
 # JUN RUI LO
 
-Next.js portfolio site with TypeScript, Tailwind CSS, and Zustand. Deploy on Vercel.
+Next.js portfolio site with TypeScript, Tailwind CSS, and Zustand. Deployed on Netlify.
 
 ## Setup
 
@@ -33,15 +33,17 @@ Open [http://localhost:3000](http://localhost:3000).
 - `npm run build` — production build
 - `npm start` — serve production build
 
-## Deploy (Vercel)
+## Deploy (Netlify)
 
-1. Import the Git repo in the [Vercel dashboard](https://vercel.com/new).
-2. Framework preset: **Next.js** (auto-detected).
-3. Add the same environment variables listed above.
-4. Deploy.
+Build settings are in `netlify.toml` (`npm run build`, publish `.next`, Node 20).
 
-Or from the CLI:
+### One-time cleanup in the Netlify UI
 
-```bash
-npx vercel
-```
+Old CRA settings will break this site. In **Site configuration**:
+
+1. **Build & deploy → Build settings** — clear any override that still uses publish directory `build` or a Functions directory of `functions`. Prefer letting `netlify.toml` win (or set publish to `.next`).
+2. **Redirects** — remove any `/* → /index.html` SPA fallback.
+3. **Environment variables** — add the same keys as in `.env` above (server-only; no `REACT_APP_` / `NEXT_PUBLIC_` needed for Cloudinary).
+4. Trigger a new deploy after pushing `netlify.toml`.
+
+Your custom domain DNS can stay as-is; only the app build/runtime changed.

@@ -1,0 +1,10 @@
+[build]
+  command = "npm run build"
+  publish = ".next"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+# Next.js runtime is applied automatically by Netlify.
+# Do not set a Functions directory or SPA /* → /index.html redirect
+# in the Netlify UI — those are CRA leftovers and break this app.
