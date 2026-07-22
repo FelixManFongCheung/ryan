@@ -8,8 +8,8 @@ import type {
   MetadataField,
 } from './types';
 
-/** Revalidate Cloudinary-backed pages hourly. */
-export const CLOUDINARY_REVALIDATE_SECONDS = 3600;
+/** Revalidate Cloudinary-backed pages every 10 minutes. */
+export const CLOUDINARY_REVALIDATE_SECONDS = 600;
 
 type CollectionSegment = 'works' | 'editions' | 'curatorialprojects';
 

@@ -1,5 +1,7 @@
 export type GalleryImage = {
   url: string;
+  /** Cloudinary upload timestamp (ISO), for ordering/debug */
+  created_at?: string;
 };
 
 export type CollectionDescription = {

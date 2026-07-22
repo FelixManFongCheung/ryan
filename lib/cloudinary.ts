@@ -1,5 +1,4 @@
 import { v2 as cloudinary } from 'cloudinary';
-import { getImageSuffixNumber } from './orderCollections';
 import type {
   CloudinarySegment,
   Collection,
@@ -19,10 +18,17 @@ cloudinary.config({
 type CloudinaryResource = {
   public_id: string;
   secure_url: string;
+  created_at?: string;
   context?: {
     custom?: Collection['description'];
   };
 };
+
+function byUploadOrder(a: CloudinaryResource, b: CloudinaryResource): number {
+  const aTime = a.created_at ? Date.parse(a.created_at) : 0;
+  const bTime = b.created_at ? Date.parse(b.created_at) : 0;
+  return aTime - bTime;
+}
 
 async function listFolderResources(folderPath: string): Promise<CloudinaryResource[]> {
   const resources: CloudinaryResource[] = [];
@@ -52,19 +58,32 @@ async function fetchCollections(folderRoot: string): Promise<CollectionsMap> {
         return;
       }
 
-      const orderedImages = [...resources].sort(
-        (a, b) =>
-          getImageSuffixNumber(a.public_id) - getImageSuffixNumber(b.public_id)
-      );
+      // Description: unchanged — pick first asset that has structured context.
       const descriptionSource =
-        orderedImages.find((image) => image.context?.custom) ?? orderedImages[0];
+        resources.find((image) => image.context?.custom) ?? resources[0];
+
+      // Images only: oldest upload first.
+      const orderedImages = [...resources].sort(byUploadOrder);
       const folderName = folder.name.replace(/_/g, ' ');
+      const description = descriptionSource?.context?.custom;
+      const images = orderedImages.map((image) => ({
+        url: image.secure_url,
+        created_at: image.created_at,
+      }));
+
+      console.log(`[cloudinary] ${folderRoot}/${folder.name}`, {
+        description,
+        descriptionFrom: descriptionSource?.public_id,
+        images: images.map((image, index) => ({
+          index,
+          upload_time: image.created_at,
+          url: image.url,
+        })),
+      });
 
       data[folderName] = {
-        description: descriptionSource?.context?.custom,
-        images: orderedImages.map((image) => ({
-          url: image.secure_url,
-        })),
+        description,
+        images,
       } satisfies Collection;
     })
   );
