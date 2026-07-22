@@ -71,16 +71,6 @@ async function fetchCollections(folderRoot: string): Promise<CollectionsMap> {
         created_at: image.created_at,
       }));
 
-      console.log(`[cloudinary] ${folderRoot}/${folder.name}`, {
-        description,
-        descriptionFrom: descriptionSource?.public_id,
-        images: images.map((image, index) => ({
-          index,
-          upload_time: image.created_at,
-          url: image.url,
-        })),
-      });
-
       data[folderName] = {
         description,
         images,

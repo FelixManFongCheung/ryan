@@ -54,17 +54,6 @@ export default function Works({
     : (displayCollection?.images ?? []);
   const displayDescription = description ?? displayCollection?.description;
 
-  console.log("[Works] collection", {
-    segment,
-    title: displayName,
-    description: displayDescription,
-    images: displayImages.map((image, index) => ({
-      index,
-      upload_time: image.created_at,
-      url: image.url,
-    })),
-  });
-
   return (
     <div className="page-content work flex flex-col">
       <Titles
