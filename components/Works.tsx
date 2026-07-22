@@ -1,6 +1,5 @@
 "use client";
 
-import { orderCollections } from "@/lib/orderCollections";
 import { useCollectionsStore } from "@/lib/store";
 import type { CollectionsMap } from "@/lib/types";
 import { useEffect } from "react";
@@ -10,9 +9,14 @@ import Titles from "./Titles";
 type WorksProps = {
   segment: "works" | "editions" | "curatorialprojects";
   editionBoolean?: boolean;
+  initialCollections: CollectionsMap;
 };
 
-export default function Works({ segment, editionBoolean }: WorksProps) {
+export default function Works({
+  segment,
+  editionBoolean,
+  initialCollections,
+}: WorksProps) {
   const collections = useCollectionsStore((state) => state.collections);
   const selectedImages = useCollectionsStore((state) => state.selectedImages);
   const titleName = useCollectionsStore((state) => state.selectedName);
@@ -20,24 +24,14 @@ export default function Works({ segment, editionBoolean }: WorksProps) {
   const setCollections = useCollectionsStore((state) => state.setCollections);
   const setSelectedName = useCollectionsStore((state) => state.setSelectedName);
   const clearImages = useCollectionsStore((state) => state.clearImages);
-  const clearState = useCollectionsStore((state) => state.clearState);
 
   useEffect(() => {
-    clearState();
-
-    const fetchCollections = async () => {
-      const response = await fetch(`/api/cloudinary/${segment}`);
-      const data = (await response.json()) as CollectionsMap;
-      const orderedItems = orderCollections(data);
-      setCollections(orderedItems);
-      const firstName = Object.keys(orderedItems)[0];
-      if (firstName) {
-        setSelectedName(firstName);
-      }
-    };
-
-    fetchCollections();
-  }, [segment, clearState, setCollections, setSelectedName]);
+    setCollections(initialCollections);
+    const firstName = Object.keys(initialCollections)[0];
+    if (firstName) {
+      setSelectedName(firstName);
+    }
+  }, [segment, initialCollections, setCollections, setSelectedName]);
 
   const handleChangingTitle = (title: string) => {
     clearImages();
@@ -48,38 +42,55 @@ export default function Works({ segment, editionBoolean }: WorksProps) {
     });
   };
 
+  const displayCollections =
+    Object.keys(collections).length > 0 ? collections : initialCollections;
+  const displayName =
+    titleName ?? Object.keys(displayCollections)[0] ?? null;
+  const displayCollection = displayName
+    ? displayCollections[displayName]
+    : undefined;
+  const displayImages = selectedImages.length
+    ? selectedImages
+    : (displayCollection?.images ?? []);
+  const displayDescription = description ?? displayCollection?.description;
+
   return (
     <div className="page-content work flex flex-col">
       <Titles
-        collections={collections}
-        titleName={titleName}
+        collections={displayCollections}
+        titleName={displayName}
         handleChangingTitle={handleChangingTitle}
         editionBoolean={editionBoolean}
       />
 
-      {description && (
+      {displayDescription && (
         <div className="info mb-[50px] ml-auto w-3/5 text-[15px] max-[478px]:text-[8px] max-desktop:mx-auto max-desktop:mb-[30px] max-desktop:w-4/5 max-desktop:text-[10px]">
           <div
             className="title"
-            dangerouslySetInnerHTML={{ __html: description.caption ?? "" }}
+            dangerouslySetInnerHTML={{
+              __html: displayDescription.caption ?? "",
+            }}
           />
           <div
             className="description"
-            dangerouslySetInnerHTML={{ __html: description.alt ?? "" }}
+            dangerouslySetInnerHTML={{ __html: displayDescription.alt ?? "" }}
           />
           <div
             className="dimension"
-            dangerouslySetInnerHTML={{ __html: description.dimension ?? "" }}
+            dangerouslySetInnerHTML={{
+              __html: displayDescription.dimension ?? "",
+            }}
           />
         </div>
       )}
 
       <div className="gallery ml-auto w-3/5 max-desktop:mx-auto max-desktop:w-4/5">
-        {selectedImages.map((image, index) => (
+        {displayImages.map((image, index) => (
           <ResponsiveImage
             key={`${image.url}-${index}`}
             url={image.url}
-            alt={`${titleName ?? "work"} ${index + 1}`}
+            alt={`${displayName ?? "work"} ${index + 1}`}
+            priority={index === 0}
           />
         ))}
       </div>

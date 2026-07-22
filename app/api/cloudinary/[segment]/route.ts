@@ -1,5 +1,11 @@
 import { NextResponse } from 'next/server';
-import { fetchBySegment } from '@/lib/cloudinary';
+import {
+  CLOUDINARY_REVALIDATE_SECONDS,
+  getAbout,
+  getCollections,
+  getContact,
+  getHomeImage,
+} from '@/lib/data';
 import type { CloudinarySegment } from '@/lib/types';
 
 const VALID_SEGMENTS: CloudinarySegment[] = [
@@ -10,6 +16,8 @@ const VALID_SEGMENTS: CloudinarySegment[] = [
   'contact',
   'home',
 ];
+
+export const revalidate = 3600;
 
 export async function GET(
   _request: Request,
@@ -23,8 +31,26 @@ export async function GET(
   }
 
   try {
-    const data = await fetchBySegment(segment);
-    return NextResponse.json(data);
+    let data;
+    if (
+      segment === 'works' ||
+      segment === 'editions' ||
+      segment === 'curatorialprojects'
+    ) {
+      data = await getCollections(segment);
+    } else if (segment === 'about') {
+      data = await getAbout();
+    } else if (segment === 'contact') {
+      data = await getContact();
+    } else {
+      data = await getHomeImage();
+    }
+
+    return NextResponse.json(data, {
+      headers: {
+        'Cache-Control': `s-maxage=${CLOUDINARY_REVALIDATE_SECONDS}, stale-while-revalidate`,
+      },
+    });
   } catch (error) {
     console.error(error);
     return NextResponse.json(

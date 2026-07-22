@@ -1,5 +1,14 @@
 import Contact from '@/components/Contact';
+import { getContact } from '@/lib/data';
 
-export default function ContactPage() {
-  return <Contact />;
+export const revalidate = 3600;
+
+export default async function ContactPage() {
+  const contact = await getContact();
+  return (
+    <Contact
+      instagram={contact.instagram.default_value}
+      email={contact.email.default_value}
+    />
+  );
 }

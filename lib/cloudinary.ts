@@ -1,4 +1,5 @@
 import { v2 as cloudinary } from 'cloudinary';
+import { getImageSuffixNumber } from './orderCollections';
 import type {
   CloudinarySegment,
   Collection,
@@ -23,44 +24,21 @@ type CloudinaryResource = {
   };
 };
 
-function getImageNumber(item: CloudinaryResource): number {
-  const parts = item.public_id.split('/');
-  const basename = parts[parts.length - 1] ?? '';
-  const match = basename.match(/(\d+)$/);
-  return match ? Number(match[1]) : Number.POSITIVE_INFINITY;
-}
+async function listFolderResources(folderPath: string): Promise<CloudinaryResource[]> {
+  const resources: CloudinaryResource[] = [];
+  let nextCursor: string | undefined;
 
-function quickSort(
-  arr: CloudinaryResource[],
-  direction: 'ascending' | 'descending' = 'ascending'
-): CloudinaryResource[] {
-  if (arr.length <= 1) {
-    return arr;
-  }
+  do {
+    const page = await cloudinary.api.resources_by_asset_folder(folderPath, {
+      context: true,
+      max_results: 500,
+      next_cursor: nextCursor,
+    });
+    resources.push(...((page.resources ?? []) as CloudinaryResource[]));
+    nextCursor = page.next_cursor as string | undefined;
+  } while (nextCursor);
 
-  const pivotIndex = Math.floor(arr.length / 2);
-  const pivotID = getImageNumber(arr[pivotIndex]);
-  const left: CloudinaryResource[] = [];
-  const right: CloudinaryResource[] = [];
-
-  for (let i = 0; i < arr.length; i++) {
-    if (i === pivotIndex) continue;
-    const iterationID = getImageNumber(arr[i]);
-    if (
-      (direction === 'ascending' && iterationID < pivotID) ||
-      (direction === 'descending' && iterationID > pivotID)
-    ) {
-      left.push(arr[i]);
-    } else {
-      right.push(arr[i]);
-    }
-  }
-
-  return [
-    ...quickSort(left, direction),
-    arr[pivotIndex],
-    ...quickSort(right, direction),
-  ];
+  return resources;
 }
 
 async function fetchCollections(folderRoot: string): Promise<CollectionsMap> {
@@ -69,25 +47,21 @@ async function fetchCollections(folderRoot: string): Promise<CollectionsMap> {
 
   await Promise.all(
     subfolders.map(async (folder: { path: string; name: string }) => {
-      const images = await cloudinary.api.resources_by_asset_folder(folder.path, {
-        tags: true,
-        metadata: true,
-        context: true,
-      });
-
-      const resources = images.resources as CloudinaryResource[];
-      if (!resources?.length) {
+      const resources = await listFolderResources(folder.path);
+      if (!resources.length) {
         return;
       }
 
-      const descriptionResource = await cloudinary.api.resource(
-        resources[0].public_id
+      const orderedImages = [...resources].sort(
+        (a, b) =>
+          getImageSuffixNumber(a.public_id) - getImageSuffixNumber(b.public_id)
       );
-      const orderedImages = quickSort(resources);
+      const descriptionSource =
+        orderedImages.find((image) => image.context?.custom) ?? orderedImages[0];
       const folderName = folder.name.replace(/_/g, ' ');
 
       data[folderName] = {
-        description: (descriptionResource as CloudinaryResource)?.context?.custom,
+        description: descriptionSource?.context?.custom,
         images: orderedImages.map((image) => ({
           url: image.secure_url,
         })),

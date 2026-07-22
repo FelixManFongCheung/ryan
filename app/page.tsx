@@ -1,5 +1,15 @@
 import Home from '@/components/Home';
+import { getHomeImage, homeImageSrc } from '@/lib/data';
 
-export default function HomePage() {
-  return <Home />;
+export const revalidate = 3600;
+
+export default async function HomePage() {
+  const image = await getHomeImage();
+  const src = homeImageSrc(image);
+
+  if (!src) {
+    return null;
+  }
+
+  return <Home src={src} />;
 }

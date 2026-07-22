@@ -1,33 +1,25 @@
-'use client';
-
-import { LazyLoadImage } from 'react-lazy-load-image-component';
-import 'react-lazy-load-image-component/src/effects/blur.css';
+import BlurFadeImage from './BlurFadeImage';
 
 type ResponsiveImageProps = {
   url: string;
   alt?: string;
+  priority?: boolean;
 };
 
 export default function ResponsiveImage({
   url,
   alt = "ryan's work",
+  priority = false,
 }: ResponsiveImageProps) {
-  const intrinsicWidth = 1000;
-  const correctedURL = url.replace(
-    '/upload/',
-    `/upload/w_${intrinsicWidth},c_scale,q_auto:best/`
-  );
-
   return (
-    <LazyLoadImage
-      src={correctedURL}
-      className="gallery-image image-fade mb-[30px] h-auto w-full"
+    <BlurFadeImage
+      url={url}
       alt={alt}
-      wrapperClassName="block w-full"
-      wrapperProps={{
-        style: { transitionDelay: '1s' },
-      }}
-      effect="blur"
+      priority={priority}
+      transform="f_auto,q_auto,w_1000,c_scale"
+      sizes="(max-width: 767px) 80vw, 60vw"
+      wrapperClassName="gallery-image mb-[30px] w-full"
+      className="image-fade h-auto w-full"
     />
   );
 }

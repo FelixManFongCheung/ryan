@@ -11,10 +11,10 @@
   "dependencies": {
     "@netlify/plugin-nextjs": "^5.15.12",
     "cloudinary": "^2.2.0",
+    "framer-motion": "^12.42.2",
     "next": "^15.1.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "react-lazy-load-image-component": "^1.6.3",
     "zustand": "^5.0.2"
   },
   "devDependencies": {
@@ -22,7 +22,6 @@
     "@types/node": "^22.10.0",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
-    "@types/react-lazy-load-image-component": "^1.6.5",
     "autoprefixer": "^10.4.20",
     "eslint": "^9.16.0",
     "eslint-config-next": "^15.1.0",
